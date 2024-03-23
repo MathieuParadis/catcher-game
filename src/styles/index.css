@@ -1,8 +1,10 @@
-/* src/styles.css */
+/* TAILWIND IMPORTS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* COMPONENTS IMPORTS */
+@import './components/gameCanvas.scss';
 
 body {
   margin: 0;
@@ -17,3 +19,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

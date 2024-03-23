@@ -1,21 +1,13 @@
+// REACT IMPORT
 import React from 'react'
-import './App.css'
+
+// COMPONENTS IMPORTS
+import GameCanvas from './components/GameCanvas'
 
 function App(): JSX.Element {
   return (
-    <div className="App bg-red-300">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+    <div className="h-screen w-screen flex justify-center items-center bg-red-300 p-4 md:p-10 overflow-hidden">
+      <GameCanvas />
     </div>
   )
 }
