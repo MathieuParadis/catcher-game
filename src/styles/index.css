@@ -1,8 +1,10 @@
-/* src/styles.css */
+/* TAILWIND IMPORTS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* COMPONENTS IMPORTS */
+@import './components/gameCanvas.scss';
 
 body {
   margin: 0;
@@ -18,20 +20,3 @@ code {
     monospace;
 }
 
-/* If height is limiting dimension */
-@media (min-aspect-ratio: 3/2) {
-  .square-class {
-    height: 100%;
-    width: auto;
-    aspect-ratio: 3 / 2;
-  }
-}
-
-/* If width is limiting dimension */
-@media (max-aspect-ratio: 3/2) {
-  .square-class {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-  }
-}

@@ -1,0 +1,18 @@
+/* If height is limiting dimension */
+@media (min-aspect-ratio: 3/2) {
+    .responsive-canvas {
+      height: 100%;
+      width: auto;
+      aspect-ratio: 3 / 2;
+    }
+  }
+  
+  /* If width is limiting dimension */
+  @media (max-aspect-ratio: 3/2) {
+    .responsive-canvas {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+    }
+  }
+  
