@@ -17,3 +17,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.square-class {
+  height: 80%;
+  width: 80%;
+}
+
+
+/* If screen width is greater than height */
+@media (min-aspect-ratio: 1/1) {
+  .square-class {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* If screen height is greater than width */
+@media (max-aspect-ratio: 1/1) {
+  .square-class {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}
