@@ -18,26 +18,20 @@ code {
     monospace;
 }
 
-.square-class {
-  height: 80%;
-  width: 80%;
-}
-
-
-/* If screen width is greater than height */
-@media (min-aspect-ratio: 1/1) {
+/* If height is limiting dimension */
+@media (min-aspect-ratio: 3/2) {
   .square-class {
     height: 100%;
     width: auto;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 2;
   }
 }
 
-/* If screen height is greater than width */
-@media (max-aspect-ratio: 1/1) {
+/* If width is limiting dimension */
+@media (max-aspect-ratio: 3/2) {
   .square-class {
     width: 100%;
     height: auto;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 3 / 2;
   }
 }
