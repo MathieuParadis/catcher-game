@@ -3,7 +3,7 @@ import './App.css'
 
 function App(): JSX.Element {
   return (
-    <div className="App">
+    <div className="App bg-red-300">
       <header className="App-header">
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
