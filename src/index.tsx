@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 
 // STYLES IMPORTS
-import './index.css'
+import './styles/index.css'
 
 const rootElement = document.getElementById('root')
 if (rootElement == null) throw new Error('Failed to find the root element')
