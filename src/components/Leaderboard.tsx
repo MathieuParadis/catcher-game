@@ -1,6 +1,9 @@
 // REACT IMPORT
 import React from 'react'
 
+// COMPONENTS IMPORTS
+import RankingTable from './RankingTable'
+
 const Leaderboard = (): JSX.Element => {
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[url('../assets/image/bg2.png')] bg-cover">
@@ -15,6 +18,7 @@ const Leaderboard = (): JSX.Element => {
             <p className="text-white mb-8">
               Ready to see where you stand? Check out the top players below.
             </p>
+            <RankingTable />
           </div>
         </div>
       </div>
