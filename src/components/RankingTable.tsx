@@ -1,6 +1,4 @@
 import * as React from 'react'
-
-// MUI MATERIAL IMPORTS
 import {
   Paper,
   Table,
@@ -11,11 +9,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-
-// TYPES IMPORTS
 import type { RankRecordType } from '../types/rankRecordType'
-
-// DATA IMPORTS
 import { ranking } from '../data/ranking'
 
 const RankingTable = (): JSX.Element => {
@@ -24,8 +18,8 @@ const RankingTable = (): JSX.Element => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
+        <TableHead className="sticky top-0 z-10">
+          <TableRow className="border border-b bg-red-200">
             <TableCell align="right">
               <Typography variant="h6" fontWeight="bold">
                 Rank
@@ -46,7 +40,7 @@ const RankingTable = (): JSX.Element => {
         <TableBody>
           {sortedRanking.map(
             (rank: RankRecordType, index: number): JSX.Element => (
-              <TableRow key={rank.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableRow key={rank.id}>
                 <TableCell align="right">{index + 1}</TableCell>
                 <TableCell align="right">{rank.score}</TableCell>
                 <TableCell align="right">{rank.playerName}</TableCell>
