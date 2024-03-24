@@ -10,7 +10,7 @@ const Leaderboard = (): JSX.Element => {
       <div className="h-full w-full p-6">
         <div className="relative h-full w-full">
           {/* overlay */}
-          <div className="absolute top-0 left-0 h-full w-full bg-blue-200 opacity-30"></div>
+          <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-90"></div>
 
           {/* content */}
           <div className="absolute top-0 left-0 h-full w-full overflow-auto flex flex-col items-center p-4">
