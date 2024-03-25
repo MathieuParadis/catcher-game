@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Game from './components/Game'
 
 function App(): JSX.Element {
-  const [bgColor, setBgColor] = useState('')
+  const [bgColor, setBgColor] = useState('#000000')
 
   useEffect(() => {
     const updateTimeBasedBackgroundColor = (): void => {
@@ -34,10 +34,8 @@ function App(): JSX.Element {
 
   return (
     <div
-      // className="h-screen w-screen flex justify-center items-center p-4 md:p-10 overflow-hidden"
-      className={`h-screen w-screen flex justify-center items-center p-4 md:p-10 overflow-hidden bg-${bgColor}`}
-      // style={{ backgroundColor: bgColor }}
-    >
+      className="h-screen w-screen flex justify-center items-center p-4 md:p-10 overflow-hidden"
+      style={{ backgroundColor: bgColor }}>
       <Game />
     </div>
   )
