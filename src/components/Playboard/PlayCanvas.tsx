@@ -12,6 +12,7 @@ import {
   handleStopGame
 } from '../../redux/slices/playModeSlice'
 
+// ASSETS IMPORTS
 import boat from '../../assets/image/boat.png'
 
 const PlayCanvas = (): JSX.Element => {
@@ -27,26 +28,6 @@ const PlayCanvas = (): JSX.Element => {
   const stopGame = (): void => {
     dispatch(handleStopGame())
   }
-
-  useEffect(() => {
-    if (canvasRef.current != null) {
-      const ctx = canvasRef.current.getContext('2d')
-      if (ctx != null) {
-        // Calculate the width of the boat (20% of canvas width)
-        const canvasWidth = canvasRef.current.width
-        const canvasHeight = canvasRef.current.height
-        const rectangleWidth = canvasWidth * 0.2
-
-        // Calculate the position to draw the rectangle in the middle
-        const rectangleX = (canvasWidth - rectangleWidth) / 2
-        const rectangleY = canvasHeight - 10
-
-        // Draw the rectangle
-        ctx.fillStyle = 'blue' // Set fill color
-        ctx.fillRect(rectangleX, rectangleY, 50, 1) // Draw the rectangle
-      }
-    }
-  }, [canvasRef, isStartTimerActive, isGameOver])
 
   useEffect(() => {
     if (canvasRef.current != null) {
