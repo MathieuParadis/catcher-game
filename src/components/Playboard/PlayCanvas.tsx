@@ -1,10 +1,11 @@
 // REACT IMPORTS
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 // COMPONENTS
 import Timer from './Timer'
 
 const PlayCanvas = (): JSX.Element => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isStartTimerActive, setIsStartTimerActive] = useState(true)
 
   return (
@@ -18,7 +19,9 @@ const PlayCanvas = (): JSX.Element => {
         />
       )}
       {!isStartTimerActive && (
-        <div className="h-full w-full flex justify-center items-center">GAAMEEEEE</div>
+        <div className="w-full h-full flex justify-center items-center">
+          <canvas className="w-full h-full" ref={canvasRef}></canvas>
+        </div>
       )}
     </>
   )
