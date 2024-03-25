@@ -3,6 +3,7 @@ import React from 'react'
 
 // COMPONENTS
 import Rules from './Rules'
+import Timer from './Timer'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
@@ -23,6 +24,8 @@ const Playboard = (): JSX.Element => {
         <button className="absolute p-2 w-[150px] border z-[10]" onClick={backToMainMenu}>
           Back
         </button>
+
+        <Timer countdownSeconds={3} />
 
         {/* rules */}
         {showRules && <Rules />}
