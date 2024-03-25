@@ -10,6 +10,7 @@ import type { GameModeType } from '../../types/gameModeTypes'
 // Initial state
 const initialState: GameModeType = {
   isPlayMode: false,
+  showRules: true,
   isRankingMode: false
 }
 
