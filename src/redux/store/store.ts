@@ -7,9 +7,9 @@ import { gameModeSlice } from '../slices/gameModeSlice'
 
 export const store = configureStore({
   reducer: {
-    [gameModeSlice.name]: gameModeSlice.reducer,
+    [gameModeSlice.name]: gameModeSlice.reducer
   },
-  devTools: true,
+  devTools: true
 })
 
 type AppState = ReturnType<typeof store.getState>

@@ -1,6 +1,5 @@
 // REDUX TOOLKIT IMPORTS
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 
 // STATE IMPORT
 import type { AppState } from '../store/store'
@@ -30,7 +29,7 @@ export const gameModeSlice = createSlice({
     backToMainMenu(state) {
       state.isPlayMode = false
       state.isRankingMode = false
-    },
+    }
   }
 })
 
