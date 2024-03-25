@@ -4,10 +4,12 @@ import type { ThunkAction, Action } from '@reduxjs/toolkit'
 
 // SLICES IMPORTS
 import { gameModeSlice } from '../slices/gameModeSlice'
+import { playModeSlice } from '../slices/playModeSlice'
 
 export const store = configureStore({
   reducer: {
-    [gameModeSlice.name]: gameModeSlice.reducer
+    [gameModeSlice.name]: gameModeSlice.reducer,
+    [playModeSlice.name]: playModeSlice.reducer
   },
   devTools: true
 })
