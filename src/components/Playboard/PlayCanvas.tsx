@@ -1,13 +1,27 @@
-// REACT IMPORT
-import React from 'react'
+// REACT IMPORTS
+import React, { useState } from 'react'
 
 // COMPONENTS
-// import Timer from './Timer'
+import Timer from './Timer'
 
 const PlayCanvas = (): JSX.Element => {
-  // <Timer countdownSeconds={3} />
+  const [isStartTimerActive, setIsStartTimerActive] = useState(true)
 
-  return <div className="h-full w-full flex justify-center items-center">GAAMEEEEE</div>
+  return (
+    <>
+      {isStartTimerActive && (
+        <Timer
+          countdownSeconds={3}
+          onExpire={() => {
+            setIsStartTimerActive(false)
+          }}
+        />
+      )}
+      {!isStartTimerActive && (
+        <div className="h-full w-full flex justify-center items-center">GAAMEEEEE</div>
+      )}
+    </>
+  )
 }
 
 export default PlayCanvas
