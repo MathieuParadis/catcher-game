@@ -2,17 +2,18 @@
 import React from 'react'
 
 // COMPONENTS
+import PlayCanvas from './PlayCanvas'
 import Rules from './Rules'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { handleBackToMainMenu, selectGameModeState } from '../../redux/slices/gameModeSlice'
+import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
 import { selectPlayModeState } from '../../redux/slices/playModeSlice'
 
 const Playboard = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
-  const { showRules } = playMode
+  const { isDisplayRules } = playMode
 
   const backToMainMenu = (): void => {
     dispatch(handleBackToMainMenu())
@@ -21,17 +22,18 @@ const Playboard = (): JSX.Element => {
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[url('../assets/image/bg1.png')] bg-cover">
       <div className="relative h-full w-full">
-        <button className="absolute p-2 w-[150px] border z-[10]" onClick={backToMainMenu}>
-          Back
-        </button>
-
         {/* rules */}
-        {showRules && <Rules />}
+        {isDisplayRules && (
+          <>
+            <button className="absolute p-2 w-[150px] border z-[10]" onClick={backToMainMenu}>
+              Back
+            </button>
+            <Rules />
+          </>
+        )}
 
         {/* game */}
-        {!showRules && (
-          <div className="h-full w-full flex justify-center items-center">GAAMEEEEE</div>
-        )}
+        {!isDisplayRules && <PlayCanvas />}
       </div>
     </div>
   )
