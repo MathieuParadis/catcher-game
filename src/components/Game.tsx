@@ -2,8 +2,8 @@
 import React from 'react'
 
 // COMPONENTS IMPORTS
-import Playboard from './Playboard'
-import Leaderboard from './Leaderboard'
+import Playboard from './Playboard/Playboard'
+import Leaderboard from './Leaderboard/Leaderboard'
 
 // REDUX IMPORTS
 import { useAppSelector, useAppDispatch } from '../redux/hooks'
@@ -13,7 +13,7 @@ import {
   handleOpenRanking
 } from '../redux/slices/gameModeSlice'
 
-const GameCanvas = (): JSX.Element => {
+const Game = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const gameMode = useAppSelector(selectGameModeState)
   const { isPlayMode, isRankingMode } = gameMode
@@ -47,4 +47,4 @@ const GameCanvas = (): JSX.Element => {
   )
 }
 
-export default GameCanvas
+export default Game

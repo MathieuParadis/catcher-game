@@ -9,8 +9,8 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-import type { RankRecordType } from '../types/rankRecordTypes'
-import { ranking } from '../data/ranking'
+import type { RankRecordType } from '../../types/rankRecordTypes'
+import { ranking } from '../../data/ranking'
 
 const RankingTable = (): JSX.Element => {
   const sortedRanking = ranking.sort((a, b) => b.score - a.score)

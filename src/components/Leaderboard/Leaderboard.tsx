@@ -5,8 +5,8 @@ import React from 'react'
 import RankingTable from './RankingTable'
 
 // REDUX IMPORTS
-import { useAppDispatch } from '../redux/hooks'
-import { handleBackToMainMenu } from '../redux/slices/gameModeSlice'
+import { useAppDispatch } from '../../redux/hooks'
+import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
 
 const Leaderboard = (): JSX.Element => {
   const dispatch = useAppDispatch()
