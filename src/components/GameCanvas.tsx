@@ -1,22 +1,25 @@
-// REACT IMPORTS
-import React, { useState } from 'react'
+// REACT IMPORT
+import React from 'react'
 
 // COMPONENTS IMPORTS
 import Playboard from './Playboard'
 import Leaderboard from './Leaderboard'
 
+// REDUX IMPORTS
+import { useAppSelector, useAppDispatch } from '../redux/hooks'
+import { selectGameModeState, startGame, openRanking } from '../redux/slices/gameModeSlice'
+
 const GameCanvas = (): JSX.Element => {
-  const [isPlayMode, setIsPlayMode] = useState(false)
-  const [isRankingMode, setIsRankingMode] = useState(false)
+  const dispatch = useAppDispatch()
+  const gameMode = useAppSelector(selectGameModeState)
+  const { isPlayMode, isRankingMode } = gameMode
 
   const play = (): void => {
-    setIsPlayMode(true)
-    setIsRankingMode(false)
+    dispatch(startGame())
   }
 
   const seeRanking = (): void => {
-    setIsPlayMode(false)
-    setIsRankingMode(true)
+    dispatch(openRanking())
   }
 
   return (

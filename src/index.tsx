@@ -4,6 +4,10 @@ import React from 'react'
 // REACT-DOM IMPORT
 import ReactDOM from 'react-dom/client'
 
+// REDUX IMPORTS
+import { Provider } from 'react-redux'
+import { store } from './redux/store/store'
+
 // APP IMPORT
 import App from './App'
 
@@ -17,6 +21,8 @@ const root = ReactDOM.createRoot(rootElement)
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 )
