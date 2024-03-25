@@ -33,7 +33,19 @@ const PlayCanvas = (): JSX.Element => {
   const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void => {
     if (canvasRef.current != null) {
       const rect = canvasRef.current.getBoundingClientRect()
-      setBoatX(event.clientX - rect.left)
+      const canvasWidth = canvasRef.current.width
+      const boatWidth = canvasWidth * 0.2 // Assuming boat width is 20% of canvas width
+
+      // Calculate the mouse position relative to the canvas
+      const mouseX = (event.clientX - rect.left) * (canvasWidth / rect.width)
+      let newBoatX = mouseX - boatWidth / 2
+
+      // Ensure the boat stays within the edges of the canvas
+      newBoatX = Math.max(0, newBoatX)
+      newBoatX = Math.min(canvasWidth - boatWidth, newBoatX)
+
+      // Update the boat's X position
+      setBoatX(newBoatX)
     }
   }
 
@@ -63,7 +75,6 @@ const PlayCanvas = (): JSX.Element => {
 
         // Draw the boat
         img.onload = () => {
-          // ctx.drawImage(img, boatX, boatY, boatWidth, boatHeight)
           ctx.clearRect(0, 0, canvasWidth, canvasHeight)
           ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
         }
