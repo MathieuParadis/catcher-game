@@ -3,8 +3,8 @@ import React from 'react'
 
 const AnimatedMenu = (): JSX.Element => {
   return (
-    <div className="h-full w-full bg-gradient-to-b from-[#a5e1dd] to-[#d3ede2]">
-      <div className="waves-back">
+    <div className="relative h-full w-full bg-gradient-to-b from-[#a5e1dd] to-[#d3ede2]">
+      <div className="waves-back w-full">
         <div className="wave-back"></div>
         <div className="wave-back"></div>
         <div className="wave-back"></div>
@@ -32,19 +32,12 @@ const AnimatedMenu = (): JSX.Element => {
         <div className="hull"></div>
       </div>
 
-      <div className="waves">
+      <div className="waves w-full">
         <div className="wave"></div>
         <div className="wave"></div>
         <div className="wave"></div>
         <div className="wave"></div>
         <div className="wave"></div>
-      </div>
-
-      <div className="author">
-        Made with ♥{' '}
-        <a target="_blank" href="https://twitter.com/sarahfrisk" rel="noreferrer">
-          @SarahFrisk
-        </a>
       </div>
     </div>
   )

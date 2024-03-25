@@ -3,8 +3,8 @@
 	bottom: 20%;
 	left: 50%;
 	margin-left: -7em;
-	animation: boat (10 * .125) +s linear alternate infinite;
-	animation-delay: -.33s;
+	animation: boat 1.25s linear alternate infinite;
+	animation-delay: -0.33s;
 }
 
 .hull {
@@ -17,7 +17,7 @@
 }
 
 .hull::after {
-	content: 'SS FRISK';
+	content: 'SEA CATCH';
 	display: block;
 	color: #f2edea;
 	padding-left: 1em;
@@ -136,15 +136,13 @@
 }
 
 .waves {
-	height: 33.3%;
-	width: 100%;
+	height: 34%;
 	position: fixed;
 	bottom: 0;
 }
 
 .waves-back {
-	height: 36%;
-	width: 100%;
+	height: 33%;
 	position: fixed;
 	bottom: 0;
 }
@@ -156,7 +154,7 @@
 	height: 100%;
 	background-color: #108291;
 	border-radius: 100% 100% 0 0;
-	animation: wave 10*1.35 +s linear infinite;
+	animation: wave 13.5s linear infinite;
 }
 
 .wave {
@@ -165,8 +163,8 @@
 	width: 85%;
 	height: 100%;
 	background-color: #0cabaa;
-	border-radius: 100%  100% 0 0;
-	animation: wave 10 +s linear infinite;
+	border-radius: 100% 100% 0 0;
+	animation: wave 11s linear infinite;
 }
 
 .wave:nth-child(1),
@@ -176,37 +174,37 @@
 
 .wave:nth-child(2),
 .wave-back:nth-child(2){
-	animation-delay: -10 * (1/4) + s;
+	animation-delay: -2.5s;
 }
 
 .wave:nth-child(3),
 .wave-back:nth-child(3){
-	animation-delay: -10 * (1/2) + s;
+	animation-delay: -5s;
 }
 
 .wave:nth-child(4),
 .wave-back:nth-child(4){
-	animation-delay: -10 * (3/4) + s;
+	animation-delay: -7.5s;
 }
 .wave:nth-child(5),
 .wave-back:nth-child(5){
-	animation-delay: -10 + s;
+	animation-delay: -10s;
 }
 
 @keyframes wave {
 	0% {
 		left: 155%;
-  }
+	}
 	100% {
 		left: -155%;
-  }
+	}
 }
 
 @keyframes boat {
 	0% {
-		bottom: 30%;
-  }
+		bottom: 26%;
+	}
 	100% {
-		bottom: 20%;
-  }
+		bottom: 30%;
+	}
 }

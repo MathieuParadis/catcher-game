@@ -28,7 +28,7 @@ const Game = (): JSX.Element => {
   }
 
   return (
-    <div className="relative responsive-canvas flex justify-center items-center">
+    <div className="relative responsive-canvas flex justify-center items-center overflow-hidden">
       <AnimatedMenu />
       <div className="absolute flex flex-col justify-center items-center gap-4">
         <h1 className="text-6xl text-center mb-10">
