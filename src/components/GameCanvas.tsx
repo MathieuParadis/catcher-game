@@ -21,7 +21,11 @@ const GameCanvas = (): JSX.Element => {
 
   return (
     <div className="relative responsive-canvas flex justify-center items-center bg-[#448ee9]">
-      <div className="flex flex-col justify-center items-center gap-2">
+      <div className="flex flex-col justify-center items-center gap-4">
+        <h1 className="text-6xl text-center mb-10">
+          Welcome to<br></br>
+          <span className="font-bold">Sea Catch Adventure</span>
+        </h1>
         <button className="p-2 w-[150px] border" onClick={play}>
           Play
         </button>
