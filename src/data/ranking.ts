@@ -1,5 +1,5 @@
 // TYPES IMPORTS
-import type { RankRecordType } from '../types/rankRecordType'
+import type { RankRecordType } from '../types/rankRecordTypes'
 
 export const ranking: RankRecordType[] = [
   {
