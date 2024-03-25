@@ -10,6 +10,7 @@ import type { GameModeType } from '../../types/gameModeTypes'
 // Initial state
 const initialState: GameModeType = {
   isPlayMode: false,
+  showRules: true,
   isRankingMode: false
 }
 
@@ -18,22 +19,27 @@ export const gameModeSlice = createSlice({
   name: 'gameMode',
   initialState,
   reducers: {
-    startGame(state) {
+    handleStartGame(state) {
       state.isPlayMode = true
       state.isRankingMode = false
     },
-    openRanking(state) {
+    handleHideRules(state) {
+      state.showRules = false
+    },
+    handleOpenRanking(state) {
       state.isPlayMode = false
       state.isRankingMode = true
     },
-    backToMainMenu(state) {
+    handleBackToMainMenu(state) {
       state.isPlayMode = false
+      state.showRules = true
       state.isRankingMode = false
     }
   }
 })
 
-export const { startGame, openRanking, backToMainMenu } = gameModeSlice.actions
+export const { handleStartGame, handleHideRules, handleOpenRanking, handleBackToMainMenu } =
+  gameModeSlice.actions
 
 export const selectGameModeState = (state: AppState): GameModeType => state.gameMode
 
