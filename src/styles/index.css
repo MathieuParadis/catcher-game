@@ -4,7 +4,8 @@
 @tailwind utilities;
 
 /* COMPONENTS IMPORTS */
-@import './components/gameCanvas.scss';
+@import './components/animatedBoat.scss';
+@import './components/game.scss';
 
 body {
   margin: 0;
