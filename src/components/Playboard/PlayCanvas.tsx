@@ -1,5 +1,5 @@
 // REACT IMPORTS
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // COMPONENTS
 import Timer from './Timer'
@@ -20,6 +20,7 @@ const PlayCanvas = (): JSX.Element => {
   const playMode = useAppSelector(selectPlayModeState)
   const { isStartTimerActive, isGameOver } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [boatX, setBoatX] = useState(0)
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -27,6 +28,13 @@ const PlayCanvas = (): JSX.Element => {
 
   const stopGame = (): void => {
     dispatch(handleStopGame())
+  }
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void => {
+    if (canvasRef.current != null) {
+      const rect = canvasRef.current.getBoundingClientRect()
+      setBoatX(event.clientX - rect.left)
+    }
   }
 
   useEffect(() => {
@@ -48,17 +56,20 @@ const PlayCanvas = (): JSX.Element => {
         const boatWidth = canvasWidth * 0.2
         const boatHeight = boatWidth * 1.23
 
+        // Initial positon of the boat
         // Calculate the position to draw the boat in the middle
-        const boatX = (canvasWidth - boatWidth) / 2
-        const boatY = canvasHeight - boatHeight - 50
+        // const initialBoatX = (canvasWidth - boatWidth) / 2
+        const initialBoatY = canvasHeight - boatHeight - 50
 
         // Draw the boat
         img.onload = () => {
-          ctx.drawImage(img, boatX, boatY, boatWidth, boatHeight)
+          // ctx.drawImage(img, boatX, boatY, boatWidth, boatHeight)
+          ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+          ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
         }
       }
     }
-  }, [canvasRef, isStartTimerActive, isGameOver])
+  }, [canvasRef, isStartTimerActive, isGameOver, boatX])
 
   return (
     <>
@@ -74,7 +85,10 @@ const PlayCanvas = (): JSX.Element => {
                 <Timer countdownSeconds={60} onExpire={stopGame} />
                 <button className="p-2 w-[150px] border z-[10]">Pause</button>
               </div>
-              <canvas className="w-full h-full" ref={canvasRef}></canvas>
+              <canvas
+                className="w-full h-full p-0 m-0"
+                ref={canvasRef}
+                onMouseMove={handleMouseMove}></canvas>
             </>
           )}
 
