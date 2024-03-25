@@ -7,19 +7,23 @@ import Leaderboard from './Leaderboard'
 
 // REDUX IMPORTS
 import { useAppSelector, useAppDispatch } from '../redux/hooks'
-import { selectGameModeState, startGame, openRanking } from '../redux/slices/gameModeSlice'
+import {
+  selectGameModeState,
+  handleStartGame,
+  handleOpenRanking
+} from '../redux/slices/gameModeSlice'
 
 const GameCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const gameMode = useAppSelector(selectGameModeState)
   const { isPlayMode, isRankingMode } = gameMode
 
-  const play = (): void => {
-    dispatch(startGame())
+  const startGame = (): void => {
+    dispatch(handleStartGame())
   }
 
-  const seeRanking = (): void => {
-    dispatch(openRanking())
+  const openRanking = (): void => {
+    dispatch(handleOpenRanking())
   }
 
   return (
@@ -29,10 +33,10 @@ const GameCanvas = (): JSX.Element => {
           Welcome to<br></br>
           <span className="font-bold">Sea Catch Adventure</span>
         </h1>
-        <button className="p-2 w-[150px] border" onClick={play}>
+        <button className="p-2 w-[150px] border" onClick={startGame}>
           Play
         </button>
-        <button className="p-2 w-[150px] border whitespace-nowrap" onClick={seeRanking}>
+        <button className="p-2 w-[150px] border whitespace-nowrap" onClick={openRanking}>
           See ranking
         </button>
       </div>

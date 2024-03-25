@@ -18,22 +18,22 @@ export const gameModeSlice = createSlice({
   name: 'gameMode',
   initialState,
   reducers: {
-    startGame(state) {
+    handleStartGame(state) {
       state.isPlayMode = true
       state.isRankingMode = false
     },
-    openRanking(state) {
+    handleOpenRanking(state) {
       state.isPlayMode = false
       state.isRankingMode = true
     },
-    backToMainMenu(state) {
+    handleBackToMainMenu(state) {
       state.isPlayMode = false
       state.isRankingMode = false
     }
   }
 })
 
-export const { startGame, openRanking, backToMainMenu } = gameModeSlice.actions
+export const { handleStartGame, handleOpenRanking, handleBackToMainMenu } = gameModeSlice.actions
 
 export const selectGameModeState = (state: AppState): GameModeType => state.gameMode
 
