@@ -21,12 +21,12 @@ const Leaderboard = (): JSX.Element => {
         <div className="relative h-full w-full">
           {/* overlay */}
           <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-90"></div>
+          <button className="absolute p-2 w-[150px] border z-[10]" onClick={backToMainMenu}>
+            Back
+          </button>
 
           {/* content */}
           <div className="absolute top-0 left-0 h-full w-full overflow-auto flex flex-col items-center p-4">
-            <button className="p-2 w-[150px] border whitespace-nowrap" onClick={backToMainMenu}>
-              See ranking
-            </button>
             <h1 className="text-6xl text-green-400 mb-5">Ranking</h1>
             <p className="text-2xl text-white text-center mb-8">
               Ready to see where you stand?<br></br>Check out the top players below.
