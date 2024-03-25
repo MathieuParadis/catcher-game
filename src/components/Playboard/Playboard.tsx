@@ -2,8 +2,8 @@
 import React from 'react'
 
 // COMPONENTS
+import PlayCanvas from './PlayCanvas'
 import Rules from './Rules'
-import Timer from './Timer'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
@@ -25,15 +25,11 @@ const Playboard = (): JSX.Element => {
           Back
         </button>
 
-        <Timer countdownSeconds={3} />
-
         {/* rules */}
         {showRules && <Rules />}
 
         {/* game */}
-        {!showRules && (
-          <div className="h-full w-full flex justify-center items-center">GAAMEEEEE</div>
-        )}
+        {!showRules && <PlayCanvas />}
       </div>
     </div>
   )

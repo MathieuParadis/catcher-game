@@ -1,4 +1,7 @@
+// REACT IMPORT
 import React from 'react'
+
+// REACT-TIMER-HOOK IMPORTS
 import { useTimer } from 'react-timer-hook'
 
 interface Props {
