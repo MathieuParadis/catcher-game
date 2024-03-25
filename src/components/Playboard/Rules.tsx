@@ -3,7 +3,7 @@ import React from 'react'
 
 // REDUX IMPORTS
 import { useAppDispatch } from '../../redux/hooks'
-import { handleHideRules } from '../../redux/slices/gameModeSlice'
+import { handleHideRules } from '../../redux/slices/playModeSlice'
 
 const Rules = (): JSX.Element => {
   const dispatch = useAppDispatch()

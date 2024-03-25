@@ -2,17 +2,17 @@
 import React from 'react'
 
 // COMPONENTS
-import PlayCanvas from './PlayCanvas'
 import Rules from './Rules'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { handleBackToMainMenu, selectGameModeState } from '../../redux/slices/gameModeSlice'
+import { selectPlayModeState } from '../../redux/slices/playModeSlice'
 
 const Playboard = (): JSX.Element => {
   const dispatch = useAppDispatch()
-  const gameMode = useAppSelector(selectGameModeState)
-  const { showRules } = gameMode
+  const playMode = useAppSelector(selectPlayModeState)
+  const { showRules } = playMode
 
   const backToMainMenu = (): void => {
     dispatch(handleBackToMainMenu())
@@ -29,7 +29,9 @@ const Playboard = (): JSX.Element => {
         {showRules && <Rules />}
 
         {/* game */}
-        {!showRules && <PlayCanvas />}
+        {!showRules && (
+          <div className="h-full w-full flex justify-center items-center">GAAMEEEEE</div>
+        )}
       </div>
     </div>
   )
