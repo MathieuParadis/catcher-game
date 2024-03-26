@@ -70,13 +70,18 @@ const PlayCanvas = (): JSX.Element => {
 
         // Initial positon of the boat
         // Calculate the position to draw the boat in the middle
-        // const initialBoatX = (canvasWidth - boatWidth) / 2
+        const initialBoatX = (canvasWidth - boatWidth) / 2
         const initialBoatY = canvasHeight - boatHeight - 50
 
         // Draw the boat
         img.onload = () => {
-          ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-          ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
+          if (isStartTimerActive) {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+            ctx.drawImage(img, initialBoatX, initialBoatY, boatWidth, boatHeight)
+          } else {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+            ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
+          }
         }
       }
     }
@@ -85,7 +90,22 @@ const PlayCanvas = (): JSX.Element => {
   return (
     <>
       {/* Start timer */}
-      {isStartTimerActive && <Timer countdownSeconds={3} onExpire={turnOffStartTimer} />}
+      {isStartTimerActive && (
+        <div className="relative w-full h-full flex justify-center items-center">
+          {/* overlay */}
+          <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
+          <Timer
+            className="z-10 mb-[60px] md:mb-[80px] lg:mb-[100px]"
+            textClassName="text-[80px] md:text-[140px] lg:text-[200px] mb-[40px] md:mb-[60px] lg:mb-[60px] text-white"
+            countdownSeconds={3}
+            onExpire={turnOffStartTimer}
+          />
+          <canvas
+            className="absolute w-full h-full p-0 m-0"
+            ref={canvasRef}
+            onMouseMove={handleMouseMove}></canvas>
+        </div>
+      )}
 
       {/* Game is active */}
       {!isStartTimerActive && (

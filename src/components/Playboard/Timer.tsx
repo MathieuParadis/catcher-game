@@ -7,9 +7,18 @@ import { useTimer } from 'react-timer-hook'
 interface Props {
   countdownSeconds: number
   onExpire: () => void
+  className?: string
+  textClassName?: string
+  displayBtns?: boolean
 }
 
-const Timer = ({ countdownSeconds, onExpire }: Props): JSX.Element => {
+const Timer = ({
+  countdownSeconds,
+  onExpire,
+  className,
+  textClassName,
+  displayBtns = false
+}: Props): JSX.Element => {
   const currentDate = new Date()
   const updatedDate = new Date(currentDate.getTime() + countdownSeconds * 1000)
 
@@ -20,13 +29,15 @@ const Timer = ({ countdownSeconds, onExpire }: Props): JSX.Element => {
   })
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: '100px' }}>
-        <span>{seconds}</span>
-      </div>
-      <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button>
+    <div className={className}>
+      <p className={textClassName}>{seconds}</p>
+      {displayBtns && (
+        <>
+          <button onClick={start}>Start</button>
+          <button onClick={pause}>Pause</button>
+          <button onClick={resume}>Resume</button>
+        </>
+      )}
     </div>
   )
 }
