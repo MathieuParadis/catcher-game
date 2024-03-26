@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import {
   selectPlayModeState,
   handleTurnOffStartTimer,
+  handleTurnMusicOn,
+  handleTurnMusicOff,
   handleStopGame
 } from '../../redux/slices/playModeSlice'
 
@@ -19,7 +21,7 @@ import music from '../../assets/audio/treasure_hunter.mp3'
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
-  const { isStartTimerActive, isGameOver } = playMode
+  const { isStartTimerActive, isGameOver, isMusicOn } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -27,6 +29,10 @@ const PlayCanvas = (): JSX.Element => {
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
+  }
+
+  const turnMusicOnOff = (): void => {
+    isMusicOn ? dispatch(handleTurnMusicOff()) : dispatch(handleTurnMusicOn())
   }
 
   const stopGame = (): void => {
@@ -126,11 +132,16 @@ const PlayCanvas = (): JSX.Element => {
                 <Timer countdownSeconds={60} onExpire={stopGame} />
                 <button className="p-2 w-[150px] border z-[10]">Pause</button>
               </div>
+              <button
+                className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 font1 p-1 md:p-2 pt-2 md:pt-4 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white text-base md:text-lg lg:text-xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={turnMusicOnOff}>
+                Back
+              </button>
               <canvas
                 className="w-full h-full p-0 m-0"
                 ref={canvasRef}
                 onMouseMove={handleMouseMove}></canvas>
-              <audio className="" ref={audioRef}>
+              <audio className="hidden" ref={audioRef} muted={!isMusicOn}>
                 <source src={music} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
