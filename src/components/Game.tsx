@@ -28,12 +28,12 @@ const Game = (): JSX.Element => {
   }
 
   return (
-    <div className="relative responsive-canvas flex justify-center items-center overflow-hidden">
+    <div className="relative responsive-canvas flex justify-center overflow-hidden">
       <AnimatedBoat />
-      <div className="absolute flex flex-col justify-center items-center gap-4">
-        <h1 className="text-6xl text-center mb-10">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-2xl md:text-6xl text-center my-10 font1">
           Welcome to<br></br>
-          <span className="font-bold">Sea Catch Adventure</span>
+          Sea Catch Adventure
         </h1>
         <button className="p-2 w-[150px] border" onClick={startGame}>
           Play
@@ -42,7 +42,6 @@ const Game = (): JSX.Element => {
           See ranking
         </button>
       </div>
-
       {isPlayMode && <Playboard />}
       {isRankingMode && <Leaderboard />}
     </div>

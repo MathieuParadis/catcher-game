@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 // -------------------- FONTS VARIABLES -------------------- //
-$font-1: "Luckiest+Guy", sans-serif;
+$font-1: "Luckiest Guy", sans-serif;
 
 // -------------------- COLORS VARIABLES -------------------- //
-$wave-speed: 12s;
+
 $boat-width: 14em;
+$wave-speed: 12s;
 $wave-front: #0cabaa;
 $wave-back: #108291;
 $sky1: #a5e1dd;
@@ -20,8 +21,8 @@ $skull-color: #ffffff;
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 :root {
     --font1: #{$font-1};
-    --wave-speed: #{$wave-speed};
     --boat-width: #{$boat-width};
+    --wave-speed: #{$wave-speed};
     --wave-front: #{$wave-front};
     --wave-back: #{$wave-back};
     --sky1: #{$sky1};
