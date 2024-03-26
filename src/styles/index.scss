@@ -3,8 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+// SETTINGS IMPORT
+@import './settings';
+
 /* COMPONENTS IMPORTS */
-@import './components/gameCanvas.scss';
+@import './components/animatedBoat.scss';
+@import './components/game.scss';
+
 
 body {
   margin: 0;

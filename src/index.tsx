@@ -12,7 +12,7 @@ import { store } from './redux/store/store'
 import App from './App'
 
 // STYLES IMPORTS
-import './styles/index.css'
+import './styles/index.scss'
 
 const rootElement = document.getElementById('root')
 if (rootElement == null) throw new Error('Failed to find the root element')
