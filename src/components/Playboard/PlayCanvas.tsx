@@ -14,12 +14,15 @@ import {
 
 // ASSETS IMPORTS
 import boat from '../../assets/image/boat.png'
+import music from '../../assets/audio/treasure_hunter.mp3'
 
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
   const { isStartTimerActive, isGameOver } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const audioRef = useRef<HTMLAudioElement>(null)
+
   const [boatX, setBoatX] = useState(0)
 
   const turnOffStartTimer = (): void => {
@@ -86,6 +89,14 @@ const PlayCanvas = (): JSX.Element => {
     }
   }, [canvasRef, isStartTimerActive, isGameOver, boatX])
 
+  useEffect(() => {
+    if (!isStartTimerActive && !isGameOver) {
+      void audioRef.current?.play().catch((error) => {
+        console.error('Failed to play audio:', error)
+      })
+    }
+  }, [isStartTimerActive, isGameOver])
+
   return (
     <>
       {/* Start timer */}
@@ -119,6 +130,10 @@ const PlayCanvas = (): JSX.Element => {
                 className="w-full h-full p-0 m-0"
                 ref={canvasRef}
                 onMouseMove={handleMouseMove}></canvas>
+              <audio className="" ref={audioRef}>
+                <source src={music} type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
             </>
           )}
 
