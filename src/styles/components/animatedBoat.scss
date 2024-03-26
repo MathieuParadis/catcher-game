@@ -1,5 +1,4 @@
-// Credits
-// @SarahFrisk - "https://twitter.com/sarahfrisk"
+
 
 :root {
   --wave-speed: 12s;
@@ -154,12 +153,14 @@
 
 .waves {
 	height: 30.5%;
+  width: 90%;
 	position: fixed;
 	bottom: 0;
 }
 
 .waves-back {
 	height: 31%;
+  width: 100%;
 	position: fixed;
 	bottom: 0;
 }

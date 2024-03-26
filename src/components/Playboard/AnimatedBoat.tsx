@@ -1,10 +1,13 @@
 // REACT IMPORT
 import React from 'react'
 
+// Credits
+// @SarahFrisk - "https://twitter.com/sarahfrisk"
+
 const AnimatedMenu = (): JSX.Element => {
   return (
     <div className="relative h-full w-full bg-gradient-to-b from-[#a5e1dd] to-[#d3ede2]">
-      <div className="waves-back w-full">
+      <div className="waves-back">
         <div className="wave-back"></div>
         <div className="wave-back"></div>
         <div className="wave-back"></div>
@@ -32,7 +35,7 @@ const AnimatedMenu = (): JSX.Element => {
         <div className="hull"></div>
       </div>
 
-      <div className="waves w-full">
+      <div className="waves">
         <div className="wave"></div>
         <div className="wave"></div>
         <div className="wave"></div>
