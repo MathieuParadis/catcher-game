@@ -36,7 +36,7 @@ const Game = (): JSX.Element => {
             Welcome to<br></br>
             <span className="text-red-500">Sea Catch Adventure</span>
           </h1>
-          <div className="flex flex-col justify-center items-center mt-10 md:m-0 gap-4 md:gap-6 lg:gap-8">
+          <div className="flex flex-col justify-center items-center mt-8 md:m-0 gap-4 md:gap-6 lg:gap-8">
             <button
               className="p-1 md:p-2 pt-2 md:pt-4 w-[150px] md:w-[190px] lg:w-[220px] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
               onClick={startGame}>
