@@ -6,7 +6,7 @@ import React from 'react'
 
 const AnimatedMenu = (): JSX.Element => {
   return (
-    <div className="relative h-full w-full bg-gradient-to-b from-[#a5e1dd] to-[#d3ede2]">
+    <div className="relative h-full w-full bg-gradient-to-b from-[var(--sky1)] to-[var(--sky2)]">
       <div className="waves-back">
         <div className="wave-back"></div>
         <div className="wave-back"></div>

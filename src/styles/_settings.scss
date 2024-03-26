@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+// -------------------- FONTS VARIABLES -------------------- //
+$font-1: "Luckiest+Guy", sans-serif;
+
+// -------------------- COLORS VARIABLES -------------------- //
+$wave-speed: 12s;
+$boat-width: 14em;
+$wave-front: #0cabaa;
+$wave-back: #108291;
+$sky1: #a5e1dd;
+$sky2: #d3ede2;
+$hull-color: #473322;
+$mast-color: #674333;
+$sail-color: #f2edea;
+$flag-color: #ff0000;
+$skull-color: #ffffff;
+
+
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+:root {
+    --font1: #{$font-1};
+    --wave-speed: #{$wave-speed};
+    --boat-width: #{$boat-width};
+    --wave-front: #{$wave-front};
+    --wave-back: #{$wave-back};
+    --sky1: #{$sky1};
+    --sky2: #{$sky2};
+    --hull-color: #{$hull-color};
+    --mast-color: #{$mast-color};
+    --sail-color: #{$sail-color};
+    --flag-color: #{$flag-color};
+    --skull-color: #{$skull-color};
+  }
