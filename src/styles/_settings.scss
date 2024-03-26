@@ -33,3 +33,7 @@ $skull-color: #ffffff;
     --flag-color: #{$flag-color};
     --skull-color: #{$skull-color};
   }
+
+  .font1 {
+    font-family: var(--font1);
+  }
