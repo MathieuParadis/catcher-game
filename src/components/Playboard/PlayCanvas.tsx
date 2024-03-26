@@ -76,12 +76,11 @@ const PlayCanvas = (): JSX.Element => {
         // Draw the boat
         img.onload = () => {
           if (isStartTimerActive) {
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-            ctx.drawImage(img, initialBoatX, initialBoatY, boatWidth, boatHeight)
-          } else {
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-            ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
+            setBoatX(initialBoatX)
           }
+
+          ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+          ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
         }
       }
     }
