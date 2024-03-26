@@ -1,6 +1,10 @@
 // REACT IMPORTS
 import React, { useEffect, useRef, useState } from 'react'
 
+// MUI ICONS IMPORTS
+import VolumeOffOutlinedIcon from '@mui/icons-material/VolumeOffOutlined'
+import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
+
 // COMPONENTS
 import Timer from './Timer'
 
@@ -133,9 +137,13 @@ const PlayCanvas = (): JSX.Element => {
                 <button className="p-2 w-[150px] border z-[10]">Pause</button>
               </div>
               <button
-                className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 font1 p-1 md:p-2 pt-2 md:pt-4 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white text-base md:text-lg lg:text-xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 text-2xl md:text-3xl lg:text-4xl font1 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
                 onClick={turnMusicOnOff}>
-                Back
+                {isMusicOn ? (
+                  <VolumeUpOutlinedIcon fontSize="inherit" />
+                ) : (
+                  <VolumeOffOutlinedIcon fontSize="inherit" />
+                )}
               </button>
               <canvas
                 className="w-full h-full p-0 m-0"
@@ -143,7 +151,6 @@ const PlayCanvas = (): JSX.Element => {
                 onMouseMove={handleMouseMove}></canvas>
               <audio className="hidden" ref={audioRef} muted={!isMusicOn}>
                 <source src={music} type="audio/mpeg" />
-                Your browser does not support the audio element.
               </audio>
             </>
           )}
