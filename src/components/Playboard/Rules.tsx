@@ -22,6 +22,11 @@ const Rules = (): JSX.Element => {
         <button className="p-2 w-[150px] border bg-red-800" onClick={startGame}>
           ok start
         </button>
+        <button
+          className="md:top-4 left-2 md:left-4 font1 p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+          onClick={startGame}>
+          Start
+        </button>
       </div>
     </>
   )

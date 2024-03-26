@@ -26,7 +26,7 @@ const Playboard = (): JSX.Element => {
         {isDisplayRules && (
           <>
             <button
-              className="absolute z-10 top-2 md:top-4 left-2 md:left-4 font1 p-1 md:p-2 pt-2 md:pt-4 w-[80px] md:w-[100px] lg:w-[120px] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+              className="absolute z-10 top-2 md:top-4 left-2 md:left-4 font1 p-1 md:p-2 pt-2 md:pt-4 w-[80px] md:w-[110px] lg:w-[120px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
               onClick={backToMainMenu}>
               Back
             </button>
