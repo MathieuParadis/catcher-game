@@ -1,6 +1,9 @@
 // REACT IMPORT
 import React from 'react'
 
+// MUI ICONS IMPORTS
+import UndoOutlinedIcon from '@mui/icons-material/UndoOutlined'
+
 // COMPONENTS IMPORTS
 import RankingTable from './RankingTable'
 
@@ -22,9 +25,9 @@ const Leaderboard = (): JSX.Element => {
           {/* overlay */}
           <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-90"></div>
           <button
-            className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 font1 p-1 md:p-2 pt-2 md:pt-4 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white text-base md:text-lg lg:text-xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+            className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 text-2xl md:text-3xl lg:text-4xl font1 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
             onClick={backToMainMenu}>
-            Back
+            <UndoOutlinedIcon fontSize="inherit" />
           </button>
 
           {/* content */}

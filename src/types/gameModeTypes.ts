@@ -1,6 +1,7 @@
 export interface PlayModeType {
   isDisplayRules: boolean
   isStartTimerActive: boolean
+  isMusicOn: boolean
   isGameOver: boolean
 }
 
