@@ -1,7 +1,7 @@
 .boat {
   position: fixed;
   bottom: 20%;
-  left: 38%;
+  left: 35%;
   animation: boat calc(var(--wave-speed) * 0.125) linear alternate infinite;
   margin-left: calc(var(--boat-width) / -2);
   animation-delay: -0.33s;
