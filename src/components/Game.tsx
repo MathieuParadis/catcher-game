@@ -2,7 +2,7 @@
 import React from 'react'
 
 // COMPONENTS IMPORTS
-import AnimatedMenu from './Playboard/AnimatedBoat'
+import AnimatedBoat from './Playboard/AnimatedBoat'
 import Playboard from './Playboard/Playboard'
 import Leaderboard from './Leaderboard/Leaderboard'
 
@@ -29,7 +29,7 @@ const Game = (): JSX.Element => {
 
   return (
     <div className="relative responsive-canvas flex justify-center items-center overflow-hidden">
-      <AnimatedMenu />
+      <AnimatedBoat />
       <div className="absolute flex flex-col justify-center items-center gap-4">
         <h1 className="text-6xl text-center mb-10">
           Welcome to<br></br>
