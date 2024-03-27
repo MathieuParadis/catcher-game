@@ -11,7 +11,7 @@ const RankingTable = (): JSX.Element => {
   const sortedRanking = ranking.sort((a, b) => b.score - a.score)
 
   return (
-    <table className="min-w-full sm:min-w-[550px]">
+    <table className="min-w-full sm:min-w-[550px] rounded-lg overflow-hidden border-separate border-spacing-y-2">
       <thead className="bg-sky-800 text-left text-white py-3 sticky top-[-4px]">
         <tr>
           <th className="py-3 text-center w-[80px]">Rank</th>
