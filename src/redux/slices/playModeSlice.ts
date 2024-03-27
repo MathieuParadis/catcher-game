@@ -9,7 +9,7 @@ import type { PlayModeType } from '../../types/gameModeTypes'
 
 // Initial state
 const initialState: PlayModeType = {
-  isDisplayRules: true,
+  areRulesDisplayed: true,
   isStartTimerActive: true,
   isMusicOn: true,
   isGameOver: false
@@ -21,7 +21,7 @@ export const playModeSlice = createSlice({
   initialState,
   reducers: {
     handleHideRules(state) {
-      state.isDisplayRules = false
+      state.areRulesDisplayed = false
     },
     handleTurnOffStartTimer(state) {
       state.isStartTimerActive = false

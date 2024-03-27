@@ -25,7 +25,7 @@ import music from '../../assets/audio/treasure_hunter.mp3'
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
-  const { isStartTimerActive, isGameOver, isMusicOn } = playMode
+  const { isStartTimerActive, isMusicOn } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -97,15 +97,15 @@ const PlayCanvas = (): JSX.Element => {
         }
       }
     }
-  }, [canvasRef, isStartTimerActive, isGameOver, boatX])
+  }, [canvasRef, isStartTimerActive, boatX])
 
   useEffect(() => {
-    if (!isStartTimerActive && !isGameOver) {
+    if (!isStartTimerActive) {
       void audioRef.current?.play().catch((error) => {
         console.error('Failed to play audio:', error)
       })
     }
-  }, [isStartTimerActive, isGameOver])
+  }, [isStartTimerActive])
 
   return (
     <>
@@ -130,32 +130,26 @@ const PlayCanvas = (): JSX.Element => {
       {/* Game is active */}
       {!isStartTimerActive && (
         <div className="relative w-full h-full flex justify-center items-center">
-          {!isGameOver && (
-            <>
-              <div className="absolute top-0 right-0 flex gap-8">
-                <Timer countdownSeconds={60} onExpire={stopGame} />
-                <button className="p-2 w-[150px] border z-[10]">Pause</button>
-              </div>
-              <button
-                className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 text-2xl md:text-3xl lg:text-4xl font1 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                onClick={turnMusicOnOff}>
-                {isMusicOn ? (
-                  <VolumeUpOutlinedIcon fontSize="inherit" />
-                ) : (
-                  <VolumeOffOutlinedIcon fontSize="inherit" />
-                )}
-              </button>
-              <canvas
-                className="w-full h-full p-0 m-0"
-                ref={canvasRef}
-                onMouseMove={handleMouseMove}></canvas>
-              <audio className="hidden" ref={audioRef} muted={!isMusicOn}>
-                <source src={music} type="audio/mpeg" />
-              </audio>
-            </>
-          )}
-
-          {isGameOver && <>game over</>}
+          <div className="absolute top-0 right-0 flex gap-8">
+            <Timer countdownSeconds={60} onExpire={stopGame} />
+            <button className="p-2 w-[150px] border z-[10]">Pause</button>
+          </div>
+          <button
+            className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 text-2xl md:text-3xl lg:text-4xl font1 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+            onClick={turnMusicOnOff}>
+            {isMusicOn ? (
+              <VolumeUpOutlinedIcon fontSize="inherit" />
+            ) : (
+              <VolumeOffOutlinedIcon fontSize="inherit" />
+            )}
+          </button>
+          <canvas
+            className="w-full h-full p-0 m-0"
+            ref={canvasRef}
+            onMouseMove={handleMouseMove}></canvas>
+          <audio className="hidden" ref={audioRef} muted={!isMusicOn}>
+            <source src={music} type="audio/mpeg" />
+          </audio>
         </div>
       )}
     </>
