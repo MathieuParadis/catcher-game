@@ -36,10 +36,11 @@ const Rules = (): JSX.Element => {
         onClick={backToMainMenu}>
         <UndoOutlinedIcon fontSize="inherit" />
       </button>
-      {/* overlay */}
+
+      {/* Overlay */}
       <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-90"></div>
 
-      {/* content */}
+      {/* Content */}
       <div className="absolute top-0 left-0 h-full w-full overflow-auto flex flex-col items-center p-2 md:p-4 lg:p-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl text-yellow-500 font1 my-2 md:my-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           Rules

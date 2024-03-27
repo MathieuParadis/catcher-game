@@ -2,9 +2,9 @@
 import React from 'react'
 
 // COMPONENTS
-// import PlayCanvas from './PlayCanvas'
+import GameOver from './GameOver'
+import PlayCanvas from './PlayCanvas'
 import Rules from './Rules'
-import StartTimerView from './StartTimerView'
 
 // REDUX IMPORTS
 import { useAppSelector } from '../../redux/hooks'
@@ -12,16 +12,19 @@ import { selectPlayModeState } from '../../redux/slices/playModeSlice'
 
 const Playboard = (): JSX.Element => {
   const playMode = useAppSelector(selectPlayModeState)
-  const { areRulesDisplayed, isStartTimerActive } = playMode
+  const { areRulesDisplayed, isGameOver } = playMode
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[url('../assets/image/bg1.png')] bg-cover">
       <div className="relative h-full w-full">
-        {/* rules */}
+        {/* Rules */}
         {areRulesDisplayed && <Rules />}
 
-        {/* game */}
-        {!areRulesDisplayed && isStartTimerActive && <StartTimerView />}
+        {/* Game in progress */}
+        {!areRulesDisplayed && !isGameOver && <PlayCanvas />}
+
+        {/* Game in progress */}
+        {!areRulesDisplayed && isGameOver && <GameOver />}
       </div>
     </div>
   )

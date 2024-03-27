@@ -25,7 +25,7 @@ import music from '../../assets/audio/treasure_hunter.mp3'
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
-  const { isStartTimerActive, isGameOver, isMusicOn } = playMode
+  const { isStartTimerActive, isMusicOn } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -97,15 +97,15 @@ const PlayCanvas = (): JSX.Element => {
         }
       }
     }
-  }, [canvasRef, isStartTimerActive, isGameOver, boatX])
+  }, [canvasRef, isStartTimerActive, boatX])
 
   useEffect(() => {
-    if (!isStartTimerActive && !isGameOver) {
+    if (!isStartTimerActive) {
       void audioRef.current?.play().catch((error) => {
         console.error('Failed to play audio:', error)
       })
     }
-  }, [isStartTimerActive, isGameOver])
+  }, [isStartTimerActive])
 
   return (
     <>
@@ -128,7 +128,7 @@ const PlayCanvas = (): JSX.Element => {
       )}
 
       {/* Game is active */}
-      {!isStartTimerActive && !isGameOver && (
+      {!isStartTimerActive && (
         <div className="relative w-full h-full flex justify-center items-center">
           <div className="absolute top-0 right-0 flex gap-8">
             <Timer countdownSeconds={60} onExpire={stopGame} />
@@ -151,10 +151,6 @@ const PlayCanvas = (): JSX.Element => {
             <source src={music} type="audio/mpeg" />
           </audio>
         </div>
-      )}
-
-      {!isStartTimerActive && isGameOver && (
-        <div className="relative w-full h-full flex justify-center items-center">game over</div>
       )}
     </>
   )
