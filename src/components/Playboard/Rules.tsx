@@ -12,8 +12,8 @@ import { handleHideRules } from '../../redux/slices/playModeSlice'
 
 // ASSETS IMPORTS
 import boat from '../../assets/image/boat.png'
-// import e1 from '../../assets/image/e1.png'
-// import e2 from '../../assets/image/e2.png'
+import e1 from '../../assets/image/e1.png'
+import e2 from '../../assets/image/e2.png'
 import p1 from '../../assets/image/p1.png'
 import p2 from '../../assets/image/p2.png'
 import p3 from '../../assets/image/p3.png'
@@ -112,6 +112,32 @@ const Rules = (): JSX.Element => {
 
         {/* Step 3 */}
         {step === 3 && (
+          <div className="h-full w-full overflow-auto no-scrollbar pt-1">
+            <div className="h-full w-full flex flex-col justify-between items-center">
+              <div className="grow flex flex-col justify-center items-center gap-2 md:gap-4 lg:gap-8">
+                <p className="text-lg md:text-2xl lg:text-3xl font2 text-white text-center">
+                  Beware of the perils lurking in the deep:
+                </p>
+                <div className="grid grid-cols-4 gap-4 place-items-center">
+                  <img className="w-[80%] col-start-2" src={e1} alt="trap 1" />
+                  <img className="w-[80%] col-start-3" src={e2} alt="trap 2" />
+                  <></>
+                </div>
+                <p className="text-base md:text-2xl lg:text-3xl font2 text-white text-center mt-2 md:mt-4 lg:mt-8">
+                  Every mishap will cost you dearly, deducting 100 points from your score.
+                </p>
+              </div>
+              <button
+                className="font1 p-1 md:p-2 pt-2 md:pt-4 mt-2 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={nextStep}>
+                Next
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Step 5 */}
+        {step === 5 && (
           <div className="flex flex-col justify-center items-center w-full">
             <p className="text-3xl font2 text-white text-center mb-8">Step 3</p>
             <button
