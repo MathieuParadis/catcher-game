@@ -27,7 +27,7 @@ const Timer = ({
   const currentDate = new Date()
   const updatedDate = new Date(currentDate.getTime() + countdownSeconds * 1000)
 
-  const { seconds, pause, resume } = useTimer({
+  const { seconds, totalSeconds, pause, resume } = useTimer({
     autoStart: true,
     expiryTimestamp: updatedDate,
     onExpire
@@ -42,7 +42,7 @@ const Timer = ({
       {displayIcon ? (
         <p className="flex items-center gap-2">
           <TimerSharpIcon fontSize="inherit" />
-          <span className={textClassName}>{seconds}</span>
+          <span className={textClassName}>{totalSeconds}</span>
         </p>
       ) : (
         <p className={textClassName}>{seconds}</p>
