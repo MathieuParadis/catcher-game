@@ -31,15 +31,17 @@ const Leaderboard = (): JSX.Element => {
           </button>
 
           {/* Content */}
-          <div className="absolute top-0 left-0 h-full w-full flex flex-col items-center p-2 md:p-4 lg:p-6 overflow-hidden">
+          <div className="absolute top-0 left-0 h-full w-full flex flex-col items-center p-2 md:p-4 lg:p-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-yellow-500 font1 my-2 md:my-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
               Ranking
             </h1>
-            <div className="w-full md:flex md:flex-col md: justify-center md:items-center overflow-auto no-scrollbar pt-1">
+            <div className="w-full overflow-auto no-scrollbar pt-1">
               <p className="text-xl md:text-2xl lg:text-3xl font2 text-white text-center mb-8">
                 Ready to see where you stand?<br></br>Check out the top players below.
               </p>
-              <RankingTable />
+              <div className="w-full flex justify-center">
+                <RankingTable />
+              </div>
             </div>
           </div>
         </div>
