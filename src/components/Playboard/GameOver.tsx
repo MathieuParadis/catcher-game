@@ -1,7 +1,26 @@
 // REACT IMPORT
 import React from 'react'
 
+// REDUX IMPORTS
+import { useAppDispatch } from '../../redux/hooks'
+import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
+import {
+  handlePlayAgainWithoutRules,
+  handleResetPlayModeSettings
+} from '../../redux/slices/playModeSlice'
+
 const GameOver = (): JSX.Element => {
+  const dispatch = useAppDispatch()
+
+  const backToMainMenu = (): void => {
+    dispatch(handleBackToMainMenu())
+    dispatch(handleResetPlayModeSettings())
+  }
+
+  const playAgain = (): void => {
+    dispatch(handlePlayAgainWithoutRules())
+  }
+
   return (
     <>
       {/* Overlay */}
@@ -17,12 +36,12 @@ const GameOver = (): JSX.Element => {
         <div className="flex justify-center items-center font1 mt-10 sm:mt-14 md:m-0 gap-6 md:gap-7 lg:gap-8">
           <button
             className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-            onClick={() => {}}>
+            onClick={playAgain}>
             Play<br></br>again
           </button>
           <button
             className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-            onClick={() => {}}>
+            onClick={backToMainMenu}>
             Main<br></br>menu
           </button>
         </div>

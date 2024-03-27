@@ -6,8 +6,8 @@ import UndoOutlinedIcon from '@mui/icons-material/UndoOutlined'
 
 // REDUX IMPORTS
 import { useAppDispatch } from '../../redux/hooks'
-import { handleHideRules } from '../../redux/slices/playModeSlice'
 import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
+import { handleHideRules } from '../../redux/slices/playModeSlice'
 
 // ASSETS IMPORTS
 // import boat from '../../assets/image/boat.png'
