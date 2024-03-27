@@ -1,6 +1,9 @@
 // REACT IMPORTS
 import React, { useEffect, useRef, useState } from 'react'
 
+// LODASH IMPORTSs
+import { noop } from 'lodash'
+
 // MUI ICONS IMPORTS
 import VolumeOffOutlinedIcon from '@mui/icons-material/VolumeOffOutlined'
 import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
@@ -25,7 +28,7 @@ import music from '../../assets/audio/treasure_hunter.mp3'
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
-  const { isStartTimerActive, isMusicOn } = playMode
+  const { isStartTimerActive, isGamePaused, isMusicOn } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
 
@@ -112,8 +115,10 @@ const PlayCanvas = (): JSX.Element => {
       {/* Start timer */}
       {isStartTimerActive && (
         <div className="relative w-full h-full flex justify-center items-center">
-          {/* overlay */}
+          {/* Overlay */}
           <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
+
+          {/* Content */}
           <Timer
             className="z-10 mb-[60px] md:mb-[80px] lg:mb-[100px]"
             textClassName="text-[80px] md:text-[140px] lg:text-[200px] mb-[40px] md:mb-[60px] lg:mb-[60px] text-white"
@@ -123,12 +128,43 @@ const PlayCanvas = (): JSX.Element => {
           <canvas
             className="absolute w-full h-full p-0 m-0"
             ref={canvasRef}
-            onMouseMove={handleMouseMove}></canvas>
+            onMouseMove={noop}></canvas>
         </div>
       )}
 
-      {/* Game is active */}
-      {!isStartTimerActive && (
+      {/* Game is active and in pause */}
+      {!isStartTimerActive && isGamePaused && (
+        <div className="relative w-full h-full flex justify-center items-center">
+          {/* Overlay */}
+          <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
+          <canvas className="w-full h-full p-0 m-0" ref={canvasRef} onMouseMove={noop}></canvas>
+          <div className="absolute top-0 left-0 h-full w-full overflow-auto flex flex-col justify-center items-center p-2 md:p-4 lg:p-6">
+            <h1 className="text-5xl md:text-7xl lg:text-9xl text-center text-yellow-500 font1 my-2 md:my-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+              Paused
+            </h1>
+            <div className="flex justify-center items-center font1 mt-10 sm:mt-14 md:m-0 gap-6 md:gap-7 lg:gap-8">
+              <button
+                className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={noop}>
+                Play<br></br>again
+              </button>
+              <button
+                className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={noop}>
+                Play<br></br>again
+              </button>
+              <button
+                className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={noop}>
+                Play<br></br>again
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Game is active and in progress */}
+      {!isStartTimerActive && !isGamePaused && (
         <div className="relative w-full h-full flex justify-center items-center">
           <div className="absolute top-0 right-0 flex gap-8">
             <Timer countdownSeconds={60} onExpire={stopGame} />
