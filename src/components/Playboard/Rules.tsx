@@ -42,10 +42,10 @@ const Rules = (): JSX.Element => {
 
       {/* Content */}
       <div className="absolute top-0 left-0 h-full w-full overflow-auto flex flex-col items-center p-2 md:p-4 lg:p-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl text-yellow-500 font1 my-2 md:my-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl text-center text-yellow-500 font1 my-2 md:my-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           Rules
         </h1>
-        <div>
+        <div className="flex flex-col justify-center items-center w-full">
           <p className="text-3xl font2 text-white text-center mb-8">Ahoy matey!</p>
           <button
             className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"

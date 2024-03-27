@@ -131,7 +131,7 @@ const PlayCanvas = (): JSX.Element => {
       {!isStartTimerActive && (
         <div className="relative w-full h-full flex justify-center items-center">
           <div className="absolute top-0 right-0 flex gap-8">
-            <Timer countdownSeconds={60} onExpire={stopGame} />
+            <Timer countdownSeconds={6} onExpire={stopGame} />
             <button className="p-2 w-[150px] border z-[10]">Pause</button>
           </div>
           <button
