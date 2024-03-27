@@ -19,7 +19,10 @@ $mast-color: #674333;
 $sail-color: #f2edea;
 $flag-color: #ff0000;
 $skull-color: #ffffff;
-$sand-color: #f6d7b0;
+$sand-color: #e1bf92;
+$gold-color: #e1c564;
+$silver-color: #c0c0c0;
+$bronze-color: #cd7f32;
 
 // ------------------- ANIMATION VARIABLES ------------------- //
 $boat-width: 14em;
@@ -42,6 +45,9 @@ $wave-speed: 12s;
     --flag-color: #{$flag-color};
     --skull-color: #{$skull-color};
     --sand-color: #{$sand-color};
+    --gold-color: #{$gold-color};
+    --silver-color: #{$silver-color};
+    --bronze-color: #{$bronze-color};
   }
 
   .font1 {
