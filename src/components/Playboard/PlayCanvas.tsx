@@ -21,6 +21,7 @@ import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
 import {
   selectPlayModeState,
   handleTurnOffStartTimer,
+  handleSetGameInProgress,
   handlePauseGame,
   handleResumeGame,
   handleTurnMusicOn,
@@ -37,14 +38,15 @@ import music from '../../assets/audio/treasure_hunter.mp3'
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
-  const { isStartTimerActive, isGamePaused, isMusicOn } = playMode
+  const { isStartResumeTimerActive, isGameInProgress, isGamePaused, isGameOver, isMusicOn } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
-
   const [boatX, setBoatX] = useState(0)
+  const [tempPos, setTempPos] = useState(0)
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
+    dispatch(handleSetGameInProgress())
   }
 
   const turnMusicOnOff = (): void => {
@@ -61,6 +63,8 @@ const PlayCanvas = (): JSX.Element => {
 
   const pauseGame = (): void => {
     dispatch(handlePauseGame())
+    audioRef.current?.pause()
+    setTempPos(boatX)
   }
 
   const resumeGame = (): void => {
@@ -117,8 +121,10 @@ const PlayCanvas = (): JSX.Element => {
 
         // Draw the boat
         img.onload = () => {
-          if (isStartTimerActive) {
+          if (isStartResumeTimerActive && !isGameInProgress) {
             setBoatX(initialBoatX)
+          } else if (isStartResumeTimerActive && isGameInProgress && isGamePaused) {
+            setBoatX(tempPos)
           }
 
           ctx.clearRect(0, 0, canvasWidth, canvasHeight)
@@ -126,20 +132,20 @@ const PlayCanvas = (): JSX.Element => {
         }
       }
     }
-  }, [canvasRef, isStartTimerActive, boatX])
+  }, [canvasRef, isStartResumeTimerActive, boatX, isGamePaused])
 
   useEffect(() => {
-    if (!isStartTimerActive) {
+    if (!isStartResumeTimerActive) {
       void audioRef.current?.play().catch((error) => {
         console.error('Failed to play audio:', error)
       })
     }
-  }, [isStartTimerActive])
+  }, [isStartResumeTimerActive])
 
   return (
     <>
-      {/* Start timer */}
-      {isStartTimerActive && (
+      {/* Start & resume timer */}
+      {isStartResumeTimerActive && (!isGameInProgress || isGamePaused) && (
         <div className="relative w-full h-full flex justify-center items-center">
           {/* Overlay */}
           <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
@@ -159,7 +165,7 @@ const PlayCanvas = (): JSX.Element => {
       )}
 
       {/* Game is active and in pause */}
-      {!isStartTimerActive && isGamePaused && (
+      {isGameInProgress && isGamePaused && (
         <div className="relative w-full h-full flex justify-center items-center">
           {/* Overlay */}
           <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
@@ -190,7 +196,7 @@ const PlayCanvas = (): JSX.Element => {
       )}
 
       {/* Game is active and in progress */}
-      {!isStartTimerActive && !isGamePaused && (
+      {isGameInProgress && !isGamePaused && (
         <div className="relative w-full h-full flex justify-center items-center">
           <div className="absolute top-0 right-0 flex gap-8">
             <Timer countdownSeconds={60} onExpire={stopGame} />
