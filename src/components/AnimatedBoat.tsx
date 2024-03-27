@@ -6,7 +6,7 @@ import React from 'react'
 
 const AnimatedBoat = (): JSX.Element => {
   return (
-    <div className="absolute h-full w-full bg-gradient-to-b from-[var(--sky1)] to-[var(--sky2)]">
+    <div className="absolute h-full w-full bg-gradient-to-b from-[var(--sky1-color)] to-[var(--sky2-color)]">
       <div className="waves-back">
         <div className="wave-back"></div>
         <div className="wave-back"></div>

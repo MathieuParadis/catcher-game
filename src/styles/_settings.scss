@@ -6,19 +6,27 @@
 $font-1: "Luckiest Guy", sans-serif;
 $font-2: "Comic Neue", sans-serif;
 
-// -------------------- COLORS VARIABLES -------------------- //
+// -------------------- COLORS VARIABLES --------------------- //
 
 $boat-width: 14em;
 $wave-speed: 12s;
-$wave-front: #0cabaa;
-$wave-back: #108291;
-$sky1: #a5e1dd;
-$sky2: #d3ede2;
+$wave-front-color: #0cabaa;
+$wave-back-color: #108291;
+$sky1-color: #a5e1dd;
+$sky2-color: #d3ede2;
 $hull-color: #473322;
 $mast-color: #674333;
 $sail-color: #f2edea;
 $flag-color: #ff0000;
 $skull-color: #ffffff;
+$sand-color: #e1bf92;
+$gold-color: #e1c564;
+$silver-color: #c0c0c0;
+$bronze-color: #cd7f32;
+
+// ------------------- ANIMATION VARIABLES ------------------- //
+$boat-width: 14em;
+$wave-speed: 12s;
 
 
 // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -27,15 +35,19 @@ $skull-color: #ffffff;
     --font2: #{$font-2};
     --boat-width: #{$boat-width};
     --wave-speed: #{$wave-speed};
-    --wave-front: #{$wave-front};
-    --wave-back: #{$wave-back};
-    --sky1: #{$sky1};
-    --sky2: #{$sky2};
+    --wave-front-color: #{$wave-front-color};
+    --wave-back-color: #{$wave-back-color};
+    --sky1-color: #{$sky1-color};
+    --sky2-color: #{$sky2-color};
     --hull-color: #{$hull-color};
     --mast-color: #{$mast-color};
     --sail-color: #{$sail-color};
     --flag-color: #{$flag-color};
     --skull-color: #{$skull-color};
+    --sand-color: #{$sand-color};
+    --gold-color: #{$gold-color};
+    --silver-color: #{$silver-color};
+    --bronze-color: #{$bronze-color};
   }
 
   .font1 {

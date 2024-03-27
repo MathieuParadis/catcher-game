@@ -154,7 +154,7 @@
 	bottom: 0;
 	width: 85%;
 	height: 100%;
-	background-color: var(--wave-back);
+	background-color: var(--wave-back-color);
 	border-radius: 150% 100% 0 0;
 	animation: wave calc(var(--wave-speed) * 1.3) linear infinite;
 }
@@ -164,7 +164,7 @@
 	bottom: 0;
 	width: 85%;
 	height: 100%;
-	background-color: var(--wave-front);
+	background-color: var(--wave-front-color);
 	border-radius: 90% 90% 0 0;
 	animation: wave var(--wave-speed) linear infinite;
 }
