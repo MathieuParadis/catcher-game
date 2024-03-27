@@ -27,6 +27,12 @@ export const playModeSlice = createSlice({
     handleTurnOffStartTimer(state) {
       state.isStartTimerActive = false
     },
+    handlePauseGame(state) {
+      state.isGamePaused = true
+    },
+    handleResumeGame(state) {
+      state.isGamePaused = false
+    },
     handleStopGame(state) {
       state.isGameOver = true
     },
@@ -54,6 +60,8 @@ export const playModeSlice = createSlice({
 export const {
   handleHideRules,
   handleTurnOffStartTimer,
+  handlePauseGame,
+  handleResumeGame,
   handleTurnMusicOn,
   handleTurnMusicOff,
   handleStopGame,

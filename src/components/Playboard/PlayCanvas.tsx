@@ -13,12 +13,17 @@ import Timer from './Timer'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
 import {
   selectPlayModeState,
   handleTurnOffStartTimer,
+  handlePauseGame,
+  handleResumeGame,
   handleTurnMusicOn,
   handleTurnMusicOff,
-  handleStopGame
+  handleStopGame,
+  handlePlayAgainWithoutRules,
+  handleResetPlayModeSettings
 } from '../../redux/slices/playModeSlice'
 
 // ASSETS IMPORTS
@@ -46,6 +51,23 @@ const PlayCanvas = (): JSX.Element => {
     dispatch(handleStopGame())
   }
 
+  const restartGame = (): void => {
+    dispatch(handlePlayAgainWithoutRules())
+  }
+
+  const pauseGame = (): void => {
+    dispatch(handlePauseGame())
+  }
+
+  const resumeGame = (): void => {
+    dispatch(handleResumeGame())
+  }
+
+  const backToMainMenu = (): void => {
+    dispatch(handleBackToMainMenu())
+    dispatch(handleResetPlayModeSettings())
+  }
+
   const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>): void => {
     if (canvasRef.current != null) {
       const rect = canvasRef.current.getBoundingClientRect()
@@ -64,6 +86,7 @@ const PlayCanvas = (): JSX.Element => {
       setBoatX(newBoatX)
     }
   }
+  
 
   useEffect(() => {
     if (canvasRef.current != null) {
