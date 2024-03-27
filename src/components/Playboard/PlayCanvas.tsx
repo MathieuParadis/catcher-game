@@ -151,6 +151,20 @@ const PlayCanvas = (): JSX.Element => {
     }
   }, [isStartResumeTimerActive, tempMusicCurrentTime])
 
+  // Pause & resume game on Space
+  useEffect((): (() => void) => {
+    const pauseResumeGame = (e: KeyboardEvent): void => {
+      if (e.key === ' ') {
+        isGamePaused ? resumeGame() : pauseGame()
+      }
+    }
+
+    window.addEventListener('keydown', pauseResumeGame)
+    return (): void => {
+      window.removeEventListener('keydown', pauseResumeGame)
+    }
+  })
+
   return (
     <>
       {/* Start & resume timer */}
