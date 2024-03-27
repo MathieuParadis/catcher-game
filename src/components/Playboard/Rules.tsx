@@ -136,15 +136,29 @@ const Rules = (): JSX.Element => {
           </div>
         )}
 
-        {/* Step 5 */}
-        {step === 5 && (
-          <div className="flex flex-col justify-center items-center w-full">
-            <p className="text-3xl font2 text-white text-center mb-8">Step 3</p>
-            <button
-              className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-              onClick={startGame}>
-              Start
-            </button>
+        {/* Step 4 */}
+        {step === 4 && (
+          <div className="h-full w-full overflow-auto no-scrollbar pt-1">
+            <div className="h-full w-full flex flex-col justify-between items-center">
+              <div className="grow flex flex-col justify-center items-center gap-2 md:gap-4 lg:gap-8">
+                <p className="text-lg md:text-2xl lg:text-3xl font2 text-white text-center">
+                  You have 60 seconds to prove your worth as a master mariner. Make every moment
+                  count!
+                </p>
+                <p className="text-lg md:text-2xl lg:text-3xl font2 text-white text-center">
+                  At the end of your voyage, your total score will be tallied. Beat your previous
+                  high score to earn the title of true sea champion!
+                </p>
+                <p className="text-lg md:text-2xl lg:text-4xl font2 text-white text-center font-bold mt-2 md:mt-4 lg:mt-8">
+                  Now, hoist the sails and show us what you got!
+                </p>
+              </div>
+              <button
+                className="font1 p-1 md:p-2 pt-2 md:pt-4 mt-2 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={startGame}>
+                Start
+              </button>
+            </div>
           </div>
         )}
       </div>
