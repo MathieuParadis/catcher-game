@@ -12,20 +12,24 @@ const RankingTable = (): JSX.Element => {
 
   return (
     <table className="min-w-full sm:min-w-[550px] overflow-hidden border-separate border-spacing-y-1">
-      <thead className="bg-sky-800 text-left text-white py-3 sticky top-[-4px]">
+      <thead className="bg-sky-800 text-left text-white text-xl sticky top-[-4px] font2">
         <tr>
-          <th className="py-3 text-center w-[80px]">Rank</th>
-          <th className="py-3 pl-2">Player</th>
-          <th className="py-3 pl-2">Score</th>
+          <th className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4 text-center w-[80px]">Rank</th>
+          <th className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4">Player</th>
+          <th className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4">Score</th>
         </tr>
       </thead>
-      <tbody className="text-black overflow-y-scroll bg-gradient-to-b from-[var(--sky1-color)] to-[var(--sand-color)]">
+      <tbody className="text-black overflow-y-scroll bg-gradient-to-b from-[var(--sky1-color)] to-[var(--sand-color)] font-medium">
         {sortedRanking.map(
           (rank: RankRecordType, index: number): JSX.Element => (
             <tr key={index} className="rounded-lg">
-              <td className="py-2 text-center">{index + 1}</td>
-              <td className="py-2 pl-2">{rank.playerName}</td>
-              <td className="py-2 pl-2">{rank.score}</td>
+              <td className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4">
+                <p className="text-center bg-white p-1.5 rounded-full w-[35px] h-[35px]">
+                  {index + 1}
+                </p>
+              </td>
+              <td className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4">{rank.playerName}</td>
+              <td className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4">{rank.score}</td>
             </tr>
           )
         )}
