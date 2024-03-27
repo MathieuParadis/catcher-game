@@ -42,6 +42,12 @@ export const playModeSlice = createSlice({
     handleTurnMusicOff(state) {
       state.isMusicOn = false
     },
+    handlePlayAgainWithRules(state) {
+      state.areRulesDisplayed = true
+      state.isStartTimerActive = true
+      state.isGamePaused = false
+      state.isGameOver = false
+    },
     handlePlayAgainWithoutRules(state) {
       state.areRulesDisplayed = false
       state.isStartTimerActive = true
@@ -65,6 +71,7 @@ export const {
   handleTurnMusicOn,
   handleTurnMusicOff,
   handleStopGame,
+  handlePlayAgainWithRules,
   handlePlayAgainWithoutRules,
   handleResetPlayModeSettings
 } = playModeSlice.actions

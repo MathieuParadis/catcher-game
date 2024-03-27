@@ -5,6 +5,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import { noop } from 'lodash'
 
 // MUI ICONS IMPORTS
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import PauseOutlinedIcon from '@mui/icons-material/PauseOutlined'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined'
 import VolumeOffOutlinedIcon from '@mui/icons-material/VolumeOffOutlined'
 import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
 
@@ -22,7 +26,7 @@ import {
   handleTurnMusicOn,
   handleTurnMusicOff,
   handleStopGame,
-  handlePlayAgainWithoutRules,
+  handlePlayAgainWithRules,
   handleResetPlayModeSettings
 } from '../../redux/slices/playModeSlice'
 
@@ -52,7 +56,7 @@ const PlayCanvas = (): JSX.Element => {
   }
 
   const restartGame = (): void => {
-    dispatch(handlePlayAgainWithoutRules())
+    dispatch(handlePlayAgainWithRules())
   }
 
   const pauseGame = (): void => {
@@ -86,7 +90,6 @@ const PlayCanvas = (): JSX.Element => {
       setBoatX(newBoatX)
     }
   }
-  
 
   useEffect(() => {
     if (canvasRef.current != null) {
@@ -167,19 +170,19 @@ const PlayCanvas = (): JSX.Element => {
             </h1>
             <div className="flex justify-center items-center font1 mt-10 sm:mt-14 md:m-0 gap-6 md:gap-7 lg:gap-8">
               <button
-                className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                onClick={noop}>
-                Play<br></br>again
+                className="text-3xl md:text-4xl lg:text-5xl font1 w-[90px] md:w-[110px] lg:w-[130px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={restartGame}>
+                <RestartAltOutlinedIcon fontSize="inherit" />
               </button>
               <button
-                className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                onClick={noop}>
-                Play<br></br>again
+                className="text-3xl md:text-4xl lg:text-5xl font1 w-[90px] md:w-[110px] lg:w-[130px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={resumeGame}>
+                <PlayArrowIcon fontSize="inherit" />
               </button>
               <button
-                className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                onClick={noop}>
-                Play<br></br>again
+                className="text-3xl md:text-4xl lg:text-5xl font1 w-[90px] md:w-[110px] lg:w-[130px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={backToMainMenu}>
+                <HomeOutlinedIcon fontSize="inherit" />
               </button>
             </div>
           </div>
@@ -192,6 +195,11 @@ const PlayCanvas = (): JSX.Element => {
           <div className="absolute top-0 right-0 flex gap-8">
             <Timer countdownSeconds={60} onExpire={stopGame} />
             <button className="p-2 w-[150px] border z-[10]">Pause</button>
+            <button
+              className="absolute z-10 top-2 md:top-4 lg:top-6 right-2 md:right-4 lg:right-6 text-2xl md:text-3xl lg:text-4xl font1 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+              onClick={pauseGame}>
+              <PauseOutlinedIcon fontSize="inherit" />
+            </button>
           </div>
           <button
             className="absolute z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6 text-2xl md:text-3xl lg:text-4xl font1 w-[70px] md:w-[100px] lg:w-[110px] aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
