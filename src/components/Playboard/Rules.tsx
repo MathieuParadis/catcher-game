@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 
 // MUI ICONS IMPORTS
+import MouseOutlinedIcon from '@mui/icons-material/MouseOutlined'
 import UndoOutlinedIcon from '@mui/icons-material/UndoOutlined'
 
 // REDUX IMPORTS
@@ -53,23 +54,26 @@ const Rules = (): JSX.Element => {
 
         {/* Step 1 */}
         {step === 1 && (
-          <div className="flex flex-col justify-between items-center h-full w-full">
-            <div className="flex flex-col justify-center items-center gap-8">
-              <p className="text-4xl font2 text-white text-center font-bold">Ahoy matey!</p>
-              <p className="text-4xl font2 text-white text-center">
-                Set sail and test your skills as a seafarer!<br></br>Guide your vessel and aim for
-                the highest score possible.
-              </p>
-              <img className="w-[15%]" src={boat} alt="boat controlled by player" />
-              <p className="text-3xl font2 text-white text-center">
-                Navigate your ship using the mouse.
-              </p>
+          <div className="h-full w-full overflow-auto no-scrollbar pt-1">
+            <div className="h-full w-full flex flex-col justify-between items-center">
+              <div className="flex flex-col justify-center items-center gap-8">
+                <p className="text-4xl font2 text-white text-center font-bold">Ahoy matey!</p>
+                <p className="text-4xl font2 text-white text-center">
+                  Set sail and test your skills as a seafarer!<br></br>Guide your vessel and aim for
+                  the highest score possible.
+                </p>
+                <img className="w-[15%]" src={boat} alt="boat controlled by player" />
+                <p className="text-3xl font2 text-white text-center">
+                  Navigate your ship using the mouse
+                  <MouseOutlinedIcon className="ml-2" fontSize="inherit" />
+                </p>
+              </div>
+              <button
+                className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                onClick={nextStep}>
+                Next
+              </button>
             </div>
-            <button
-              className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-              onClick={nextStep}>
-              Next
-            </button>
           </div>
         )}
 
