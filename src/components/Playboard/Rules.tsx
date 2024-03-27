@@ -1,5 +1,5 @@
-// REACT IMPORT
-import React from 'react'
+// REACT IMPORTS
+import React, { useState } from 'react'
 
 // MUI ICONS IMPORTS
 import UndoOutlinedIcon from '@mui/icons-material/UndoOutlined'
@@ -10,7 +10,7 @@ import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
 import { handleHideRules } from '../../redux/slices/playModeSlice'
 
 // ASSETS IMPORTS
-// import boat from '../../assets/image/boat.png'
+import boat from '../../assets/image/boat.png'
 // import e1 from '../../assets/image/e1.png'
 // import e2 from '../../assets/image/e2.png'
 // import p1 from '../../assets/image/p1.png'
@@ -20,6 +20,11 @@ import { handleHideRules } from '../../redux/slices/playModeSlice'
 
 const Rules = (): JSX.Element => {
   const dispatch = useAppDispatch()
+  const [step, setStep] = useState(1)
+
+  const nextStep = (): void => {
+    setStep(step + 1)
+  }
 
   const backToMainMenu = (): void => {
     dispatch(handleBackToMainMenu())
@@ -45,14 +50,52 @@ const Rules = (): JSX.Element => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl text-center text-yellow-500 font1 my-2 md:my-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           Rules
         </h1>
-        <div className="flex flex-col justify-center items-center w-full">
-          <p className="text-3xl font2 text-white text-center mb-8">Ahoy matey!</p>
-          <button
-            className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-            onClick={startGame}>
-            Start
-          </button>
-        </div>
+
+        {/* Step 1 */}
+        {step === 1 && (
+          <div className="flex flex-col justify-between items-center h-full w-full">
+            <div className="flex flex-col justify-center items-center gap-8">
+              <p className="text-4xl font2 text-white text-center font-bold">Ahoy matey!</p>
+              <p className="text-4xl font2 text-white text-center">
+                Set sail and test your skills as a seafarer!<br></br>Guide your vessel and aim for
+                the highest score possible.
+              </p>
+              <img className="w-[15%]" src={boat} alt="boat controlled by player" />
+              <p className="text-3xl font2 text-white text-center">
+                Navigate your ship using the mouse.
+              </p>
+            </div>
+            <button
+              className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+              onClick={nextStep}>
+              Next
+            </button>
+          </div>
+        )}
+
+        {/* Step 2 */}
+        {step === 2 && (
+          <div className="flex flex-col justify-center items-center w-full">
+            <p className="text-3xl font2 text-white text-center mb-8">step 2</p>
+            <button
+              className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+              onClick={nextStep}>
+              Next
+            </button>
+          </div>
+        )}
+
+        {/* Step 3 */}
+        {step === 3 && (
+          <div className="flex flex-col justify-center items-center w-full">
+            <p className="text-3xl font2 text-white text-center mb-8">Step 3</p>
+            <button
+              className="font1 p-1 md:p-2 pt-2 md:pt-4 w-[100px] md:w-[120px] lg:w-[140px] aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+              onClick={startGame}>
+              Start
+            </button>
+          </div>
+        )}
       </div>
     </>
   )
