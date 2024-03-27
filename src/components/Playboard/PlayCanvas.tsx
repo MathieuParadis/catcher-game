@@ -179,6 +179,7 @@ const PlayCanvas = (): JSX.Element => {
             textClassName="text-[80px] md:text-[140px] lg:text-[200px] mb-[40px] md:mb-[60px] lg:mb-[60px] text-white"
             countdownSeconds={3}
             onExpire={turnOffStartTimer}
+            isPause={isGamePaused}
           />
           <canvas
             className="absolute w-full h-full p-0 m-0"
@@ -192,6 +193,8 @@ const PlayCanvas = (): JSX.Element => {
         <div className="relative w-full h-full flex justify-center items-center">
           {/* Overlay */}
           <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
+
+          {/* Content */}
           <canvas className="w-full h-full p-0 m-0" ref={canvasRef} onMouseMove={noop}></canvas>
           <div className="absolute top-0 left-0 h-full w-full overflow-auto flex flex-col justify-center items-center p-2 md:p-4 lg:p-6">
             <h1 className="text-5xl md:text-7xl lg:text-9xl text-center text-yellow-500 font1 my-2 md:my-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">

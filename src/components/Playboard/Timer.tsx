@@ -1,5 +1,5 @@
-// REACT IMPORT
-import React from 'react'
+// REACT IMPORTS
+import React, { useEffect } from 'react'
 
 // REACT-TIMER-HOOK IMPORTS
 import { useTimer } from 'react-timer-hook'
@@ -10,6 +10,7 @@ interface Props {
   className?: string
   textClassName?: string
   displayBtns?: boolean
+  isPause?: boolean
 }
 
 const Timer = ({
@@ -17,7 +18,8 @@ const Timer = ({
   onExpire,
   className,
   textClassName,
-  displayBtns = false
+  displayBtns = false,
+  isPause = false
 }: Props): JSX.Element => {
   const currentDate = new Date()
   const updatedDate = new Date(currentDate.getTime() + countdownSeconds * 1000)
@@ -27,6 +29,10 @@ const Timer = ({
     expiryTimestamp: updatedDate,
     onExpire
   })
+
+  useEffect(() => {
+    isPause ? pause() : resume()
+  }, [isPause, pause, resume])
 
   return (
     <div className={className}>
