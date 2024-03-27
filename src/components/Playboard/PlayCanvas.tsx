@@ -169,9 +169,11 @@ const PlayCanvas = (): JSX.Element => {
     <div className="relative w-full h-full flex justify-center items-center">
       <Timer
         className="absolute top-2 md:top-4 lg:top-6 right-2 md:right-4 lg:right-6 text-3xl md:text-4xl lg:text-5xl font2 text-white"
+        textClassName="w-[30px] md:w-[35px] lg:w-[40px]"
         countdownSeconds={60}
         onExpire={stopGame}
         isPause={isGamePaused || isStartResumeTimerActive || !isGameInProgress}
+        displayIcon={true}
       />
       {/* Start & resume timer */}
       {isStartResumeTimerActive && (
