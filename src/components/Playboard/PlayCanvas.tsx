@@ -175,8 +175,8 @@ const PlayCanvas = (): JSX.Element => {
           Score: <span className="">{score}</span>
         </p>
         <Timer
-          className="flex justify-center items-center font1 w-[50px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-3xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover"
-          textClassName="w-[35px] md:w-[40px] lg:w-[45px]"
+          className="flex justify-center items-center font1 w-[70px] md:w-[90px] lg:w-[110px] text-xl md:text-2xl lg:text-3xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover"
+          textClassName="text-right w-[25px] md:w-[30px] lg:w-[35px]"
           countdownSeconds={60}
           onExpire={stopGame}
           isPause={isGamePaused || isStartResumeTimerActive || !isGameInProgress}
@@ -212,7 +212,7 @@ const PlayCanvas = (): JSX.Element => {
             <>
               <div className="absolute flex gap-2 md:gap-4 lg:gap-8 z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6">
                 <button
-                  className="font1 w-[50px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                  className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
                   onClick={turnMusicOnOff}>
                   {isMusicOn ? (
                     <VolumeUpOutlinedIcon fontSize="inherit" />
@@ -221,7 +221,7 @@ const PlayCanvas = (): JSX.Element => {
                   )}
                 </button>
                 <button
-                  className="font1 w-[50px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+                  className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
                   onClick={pauseGame}>
                   <PauseOutlinedIcon fontSize="inherit" />
                 </button>

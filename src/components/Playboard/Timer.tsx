@@ -40,7 +40,7 @@ const Timer = ({
   return (
     <div className={className}>
       {displayIcon ? (
-        <p className="flex items-center gap-2">
+        <p className="flex items-start gap-1">
           <TimerSharpIcon fontSize="inherit" />
           <span className={textClassName}>{totalSeconds}</span>
         </p>
