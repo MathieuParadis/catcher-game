@@ -2,8 +2,9 @@
 import React from 'react'
 
 // COMPONENTS
-import PlayCanvas from './PlayCanvas'
+// import PlayCanvas from './PlayCanvas'
 import Rules from './Rules'
+import StartTimerView from './StartTimerView'
 
 // REDUX IMPORTS
 import { useAppSelector } from '../../redux/hooks'
@@ -11,7 +12,7 @@ import { selectPlayModeState } from '../../redux/slices/playModeSlice'
 
 const Playboard = (): JSX.Element => {
   const playMode = useAppSelector(selectPlayModeState)
-  const { areRulesDisplayed } = playMode
+  const { areRulesDisplayed, isStartTimerActive } = playMode
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[url('../assets/image/bg1.png')] bg-cover">
@@ -20,7 +21,7 @@ const Playboard = (): JSX.Element => {
         {areRulesDisplayed && <Rules />}
 
         {/* game */}
-        {!areRulesDisplayed && <PlayCanvas />}
+        {!areRulesDisplayed && isStartTimerActive && <StartTimerView />}
       </div>
     </div>
   )

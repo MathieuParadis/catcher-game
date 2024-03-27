@@ -2,7 +2,7 @@
 import React from 'react'
 
 // COMPONENTS IMPORTS
-import AnimatedBoat from './Playboard/AnimatedBoat'
+import AnimatedBoat from './AnimatedBoat'
 import Playboard from './Playboard/Playboard'
 import Leaderboard from './Leaderboard/Leaderboard'
 
