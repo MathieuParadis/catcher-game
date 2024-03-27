@@ -10,9 +10,11 @@ import type { PlayModeType } from '../../types/gameModeTypes'
 // Initial state
 const initialState: PlayModeType = {
   areRulesDisplayed: true,
-  isStartTimerActive: true,
-  isMusicOn: true,
-  isGameOver: false
+  isStartResumeTimerActive: true,
+  isGameInProgress: false,
+  isGamePaused: false,
+  isGameOver: false,
+  isMusicOn: true
 }
 
 // Actual Slice
@@ -24,9 +26,20 @@ export const playModeSlice = createSlice({
       state.areRulesDisplayed = false
     },
     handleTurnOffStartTimer(state) {
-      state.isStartTimerActive = false
+      state.isStartResumeTimerActive = false
+    },
+    handleSetGameInProgress(state) {
+      state.isGameInProgress = true
+    },
+    handlePauseGame(state) {
+      state.isGamePaused = true
+    },
+    handleResumeGame(state) {
+      state.isGamePaused = false
+      state.isStartResumeTimerActive = true
     },
     handleStopGame(state) {
+      state.isGameInProgress = false
       state.isGameOver = true
     },
     handleTurnMusicOn(state) {
@@ -35,14 +48,25 @@ export const playModeSlice = createSlice({
     handleTurnMusicOff(state) {
       state.isMusicOn = false
     },
+    handlePlayAgainWithRules(state) {
+      state.areRulesDisplayed = true
+      state.isStartResumeTimerActive = true
+      state.isGameInProgress = false
+      state.isGamePaused = false
+      state.isGameOver = false
+    },
     handlePlayAgainWithoutRules(state) {
       state.areRulesDisplayed = false
-      state.isStartTimerActive = true
+      state.isStartResumeTimerActive = true
+      state.isGameInProgress = false
+      state.isGamePaused = false
       state.isGameOver = false
     },
     handleResetPlayModeSettings(state) {
       state.areRulesDisplayed = true
-      state.isStartTimerActive = true
+      state.isStartResumeTimerActive = true
+      state.isGameInProgress = false
+      state.isGamePaused = false
       state.isGameOver = false
     }
   }
@@ -51,9 +75,13 @@ export const playModeSlice = createSlice({
 export const {
   handleHideRules,
   handleTurnOffStartTimer,
+  handleSetGameInProgress,
+  handlePauseGame,
+  handleResumeGame,
   handleTurnMusicOn,
   handleTurnMusicOff,
   handleStopGame,
+  handlePlayAgainWithRules,
   handlePlayAgainWithoutRules,
   handleResetPlayModeSettings
 } = playModeSlice.actions

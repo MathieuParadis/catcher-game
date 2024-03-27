@@ -1,5 +1,8 @@
-// REACT IMPORT
-import React from 'react'
+// REACT IMPORTS
+import React, { useEffect } from 'react'
+
+// MUI ICONS IMPORS
+import TimerSharpIcon from '@mui/icons-material/TimerSharp'
 
 // REACT-TIMER-HOOK IMPORTS
 import { useTimer } from 'react-timer-hook'
@@ -9,7 +12,8 @@ interface Props {
   onExpire: () => void
   className?: string
   textClassName?: string
-  displayBtns?: boolean
+  displayIcon?: boolean
+  isPause?: boolean
 }
 
 const Timer = ({
@@ -17,26 +21,31 @@ const Timer = ({
   onExpire,
   className,
   textClassName,
-  displayBtns = false
+  displayIcon = false,
+  isPause = false
 }: Props): JSX.Element => {
   const currentDate = new Date()
   const updatedDate = new Date(currentDate.getTime() + countdownSeconds * 1000)
 
-  const { seconds, start, pause, resume } = useTimer({
+  const { seconds, pause, resume } = useTimer({
     autoStart: true,
     expiryTimestamp: updatedDate,
     onExpire
   })
 
+  useEffect(() => {
+    isPause ? pause() : resume()
+  }, [isPause, pause, resume])
+
   return (
     <div className={className}>
-      <p className={textClassName}>{seconds}</p>
-      {displayBtns && (
-        <>
-          <button onClick={start}>Start</button>
-          <button onClick={pause}>Pause</button>
-          <button onClick={resume}>Resume</button>
-        </>
+      {displayIcon ? (
+        <p className="flex items-center gap-2">
+          <TimerSharpIcon fontSize="inherit" />
+          <span className={textClassName}>{seconds}</span>
+        </p>
+      ) : (
+        <p className={textClassName}>{seconds}</p>
       )}
     </div>
   )
