@@ -171,9 +171,8 @@ const PlayCanvas = (): JSX.Element => {
   return (
     <div className="relative w-full h-full flex justify-center items-center">
       <div className="absolute flex gap-2 md:gap-4 lg:gap-8 top-2 md:top-4 lg:top-6 right-2 md:right-4 lg:right-6">
-        <p className="text-3xl md:text-4xl lg:text-5xl font2 text-white">
-          {/* // className="flex justify-center items-center font1 w-[100px] md:w-[150px] lg:w-[160px] text-xl md:text-2xl lg:text-3xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover"> */}
-          Score: <span className=""> {score}</span>
+        <p className="flex justify-center items-center font1 text-2xl md:text-3xl lg:text-4xl text-white">
+          Score: {score}
         </p>
         <Timer
           className="flex justify-center items-center font1 w-[70px] md:w-[90px] lg:w-[110px] text-xl md:text-2xl lg:text-3xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover"
