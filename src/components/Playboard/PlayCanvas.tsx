@@ -184,21 +184,21 @@ const PlayCanvas = (): JSX.Element => {
 
   // Draw items on canvas
   useEffect(() => {
-    items.forEach((item) => {
-      if (canvasRef.current != null) {
-        const ctx = canvasRef.current.getContext('2d')
-        const animation = animationRef.current
+    if (canvasRef.current != null) {
+      const ctx = canvasRef.current.getContext('2d')
+      const animation = animationRef.current
 
-        const animate = (): void => {
+      // Calculate the width of the item (12.5% of canvas width)
+      const canvasWidth = canvasRef.current.width
+      const canvasHeight = canvasRef.current.height
+      const itemWidth = canvasWidth * 0.125
+      const itemHeight = itemWidth * 1
+
+      const animate = (): void => {
+        items.forEach((item) => {
           if (canvasRef.current != null && ctx != null && animation != null) {
             const img = new Image()
             img.src = item.img
-
-            // Calculate the width of the item (12.5% of canvas width)
-            const canvasWidth = canvasRef.current.width
-            const canvasHeight = canvasRef.current.height
-            const itemWidth = canvasWidth * 0.125
-            const itemHeight = itemWidth * 1
 
             // Random initial positon of the item
             const initialItemX = random(0, canvasWidth - itemWidth)
@@ -246,19 +246,19 @@ const PlayCanvas = (): JSX.Element => {
               }
             }
           }
-        }
+        })
+      }
 
-        // Start animation loop
-        animate()
+      // Start animation loop
+      animate()
 
-        // Clean up function
-        return () => {
-          if (animation != null) {
-            cancelAnimationFrame(animation)
-          }
+      // Clean up function
+      return () => {
+        if (animation != null) {
+          cancelAnimationFrame(animation)
         }
       }
-    })
+    }
   }, [
     canvasRef,
     isStartResumeTimerActive,
