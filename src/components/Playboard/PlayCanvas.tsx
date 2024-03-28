@@ -44,6 +44,7 @@ const PlayCanvas = (): JSX.Element => {
   const animationRef = useRef(0)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [boatX, setBoatX] = useState(0)
+  const [boatY, setBoatY] = useState(0)
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
@@ -136,15 +137,16 @@ const PlayCanvas = (): JSX.Element => {
         img.onload = () => {
           if (isStartResumeTimerActive && !isGameInProgress) {
             setBoatX(initialBoatX)
+            setBoatY(initialBoatY)
           } else if (isStartResumeTimerActive && isGameInProgress && isGamePaused) {
             setBoatX(tempBoatX)
           }
 
-          ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
+          ctx.drawImage(img, boatX, boatY, boatWidth, boatHeight)
         }
       }
     }
-  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, tempBoatX])
+  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, boatY, tempBoatX])
 
   // Draw items on canvas
   useEffect(() => {
