@@ -151,9 +151,10 @@ const PlayCanvas = (): JSX.Element => {
   useEffect(() => {
     if (canvasRef.current != null) {
       const ctx = canvasRef.current.getContext('2d')
+      const animation = animationRef.current
 
       const animate = (): void => {
-        if (canvasRef.current != null && ctx != null && animationRef.current != null) {
+        if (canvasRef.current != null && ctx != null && animation != null) {
           const img = new Image()
           img.src = p1
 
@@ -185,8 +186,8 @@ const PlayCanvas = (): JSX.Element => {
 
       // Clean up function
       return () => {
-        if (animationRef.current != null) {
-          cancelAnimationFrame(animationRef.current)
+        if (animation != null) {
+          cancelAnimationFrame(animation)
         }
       }
     }
