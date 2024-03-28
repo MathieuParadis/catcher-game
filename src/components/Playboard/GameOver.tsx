@@ -9,7 +9,11 @@ import {
   handleResetPlayModeSettings
 } from '../../redux/slices/playModeSlice'
 
-const GameOver = (): JSX.Element => {
+interface Props {
+  score: number
+}
+
+const GameOver = ({ score }: Props): JSX.Element => {
   const dispatch = useAppDispatch()
 
   const backToMainMenu = (): void => {
@@ -32,6 +36,7 @@ const GameOver = (): JSX.Element => {
           Game Over
         </h1>
         <p className="text-3xl font2 text-white text-center mb-8">Congratulations!</p>
+        <p className="text-3xl font2 text-white text-center mb-8">Your score: {score}</p>
 
         <div className="flex justify-center items-center font1 mt-10 sm:mt-14 md:m-0 gap-6 md:gap-7 lg:gap-8">
           <button

@@ -1,5 +1,5 @@
-// REACT IMPORT
-import React from 'react'
+// REACT IMPORTS
+import React, { useState } from 'react'
 
 // COMPONENTS
 import GameOver from './GameOver'
@@ -13,6 +13,7 @@ import { selectPlayModeState } from '../../redux/slices/playModeSlice'
 const Playboard = (): JSX.Element => {
   const playMode = useAppSelector(selectPlayModeState)
   const { areRulesDisplayed, isGameOver } = playMode
+  const [score, setScore] = useState(0)
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[url('../assets/image/bg1.png')] bg-cover">
@@ -21,10 +22,10 @@ const Playboard = (): JSX.Element => {
         {areRulesDisplayed && <Rules />}
 
         {/* Game in progress */}
-        {!areRulesDisplayed && !isGameOver && <PlayCanvas />}
+        {!areRulesDisplayed && !isGameOver && <PlayCanvas score={score} setScore={setScore} />}
 
         {/* Game in progress */}
-        {!areRulesDisplayed && isGameOver && <GameOver />}
+        {!areRulesDisplayed && isGameOver && <GameOver score={score} />}
       </div>
     </div>
   )

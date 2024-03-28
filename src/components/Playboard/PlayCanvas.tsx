@@ -45,7 +45,12 @@ import music from '../../assets/audio/treasure_hunter.mp3'
 // DATA IMPORTS
 import { items } from '../../data/items'
 
-const PlayCanvas = (): JSX.Element => {
+interface Props {
+  score: number
+  setScore: (value: number) => void
+}
+
+const PlayCanvas = ({ score, setScore }: Props): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
   const { isStartResumeTimerActive, isGameInProgress, isGamePaused, isMusicOn } = playMode
@@ -59,7 +64,7 @@ const PlayCanvas = (): JSX.Element => {
     h: 0
   })
   const [tempBoatX, setTempBoatX] = useState(0)
-  const [score, setScore] = useState(0)
+  // const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
   const [item, setItem] = useState<ItemWithPositionType>()
   const [dropNewItem, setDropNewItem] = useState(true)
@@ -248,12 +253,12 @@ const PlayCanvas = (): JSX.Element => {
       }
     }
   }, [
-    canvasRef,
     isStartResumeTimerActive,
     isGamePaused,
     isGameInProgress,
     boat,
     score,
+    setScore,
     item,
     dropNewItem
   ])
