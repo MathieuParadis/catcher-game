@@ -200,7 +200,7 @@ const PlayCanvas = (): JSX.Element => {
             // Check for collision
             if (
               checkCatch({
-                obj1: { x: boat.x, y: boat.y, w: boatWidth, h: boatHeight },
+                obj1: boat,
                 obj2: { x: itemX, y: itemY, w: itemWidth, h: itemHeight }
               })
             ) {
