@@ -121,6 +121,7 @@ const PlayCanvas = (): JSX.Element => {
   const generateRandomItem = (): ItemWithPositionType => {
     return {
       ...imgItems[random(0, imgItems.length, false)],
+      id: '',
       x: 0,
       y: 0,
       w: 0,

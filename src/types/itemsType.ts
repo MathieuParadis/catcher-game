@@ -1,10 +1,10 @@
 export interface ItemType {
-  id: number | string
   img: string
   value: number
 }
 
 export interface ItemWithPositionType extends ItemType {
+  id: number | string
   x: number
   y: number
   w: number
