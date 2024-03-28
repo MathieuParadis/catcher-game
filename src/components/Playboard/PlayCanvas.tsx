@@ -179,8 +179,6 @@ const PlayCanvas = (): JSX.Element => {
           const canvasHeight = canvasRef.current.height
           const itemWidth = canvasWidth * 0.125
           const itemHeight = itemWidth * 1
-          const boatWidth = canvasWidth * 0.2
-          const boatHeight = boatWidth * 1.23
 
           // Random initial positon of the item
           const initialItemX = random(0, canvasWidth - itemWidth)
@@ -229,8 +227,7 @@ const PlayCanvas = (): JSX.Element => {
     isStartResumeTimerActive,
     isGamePaused,
     isGameInProgress,
-    boat.x,
-    boat.y,
+    boat,
     tempBoatX,
     itemX,
     itemY,
