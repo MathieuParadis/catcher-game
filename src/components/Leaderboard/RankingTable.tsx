@@ -2,7 +2,7 @@
 import React from 'react'
 
 // TYPES IMPORTS
-import type { RankRecordType } from '../../types/rankRecordTypes'
+import type { ScoreRecordType } from '../../types/ScoreRecordTypes'
 
 // DATA IMPORTS
 import { ranking } from '../../data/ranking'
@@ -21,7 +21,7 @@ const RankingTable = (): JSX.Element => {
       </thead>
       <tbody className="text-black overflow-y-scroll bg-gradient-to-b from-[var(--sky1-color)] to-[var(--sand-color)] font-medium">
         {sortedRanking.map(
-          (rank: RankRecordType, index: number): JSX.Element => (
+          (rank: ScoreRecordType, index: number): JSX.Element => (
             <tr key={index} className="">
               <td className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4 rounded-l-md">
                 {index + 1 === 1 && (
