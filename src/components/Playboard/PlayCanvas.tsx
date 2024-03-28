@@ -140,7 +140,6 @@ const PlayCanvas = (): JSX.Element => {
             setBoatX(tempBoatX)
           }
 
-          // ctx.clearRect(0, 0, canvasWidth, canvasHeight)
           ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
         }
       }
@@ -231,7 +230,28 @@ const PlayCanvas = (): JSX.Element => {
 
   return (
     <div className="relative w-full h-full flex justify-center items-center">
-      <div className="absolute flex gap-2 md:gap-4 lg:gap-8 top-2 md:top-4 lg:top-6 right-2 md:right-4 lg:right-6">
+      {/* Top buttons */}
+      <div className="absolute z-20 flex gap-2 md:gap-4 lg:gap-8 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6">
+        <button
+          className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+          onClick={turnMusicOnOff}>
+          {isMusicOn ? (
+            <VolumeUpOutlinedIcon fontSize="inherit" />
+          ) : (
+            <VolumeOffOutlinedIcon fontSize="inherit" />
+          )}
+        </button>
+        {!(isGamePaused || isStartResumeTimerActive) && (
+          <button
+            className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+            onClick={pauseGame}>
+            <PauseOutlinedIcon fontSize="inherit" />
+          </button>
+        )}
+      </div>
+
+      {/* Score and timer */}
+      <div className="absolute z-20 flex gap-2 md:gap-4 lg:gap-8 top-2 md:top-4 lg:top-6 right-2 md:right-4 lg:right-6">
         <p className="flex justify-center items-center font1 text-2xl md:text-3xl lg:text-4xl text-white">
           Score: {score}
         </p>
@@ -244,6 +264,7 @@ const PlayCanvas = (): JSX.Element => {
           displayIcon={true}
         />
       </div>
+
       {/* Start & resume timer */}
       {isStartResumeTimerActive && (
         <>
@@ -271,22 +292,6 @@ const PlayCanvas = (): JSX.Element => {
           {/* ... and in progress */}
           {!isGamePaused && (
             <>
-              <div className="absolute flex gap-2 md:gap-4 lg:gap-8 z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6">
-                <button
-                  className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                  onClick={turnMusicOnOff}>
-                  {isMusicOn ? (
-                    <VolumeUpOutlinedIcon fontSize="inherit" />
-                  ) : (
-                    <VolumeOffOutlinedIcon fontSize="inherit" />
-                  )}
-                </button>
-                <button
-                  className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                  onClick={pauseGame}>
-                  <PauseOutlinedIcon fontSize="inherit" />
-                </button>
-              </div>
               <canvas
                 className="w-full h-full p-0 m-0"
                 ref={canvasRef}
