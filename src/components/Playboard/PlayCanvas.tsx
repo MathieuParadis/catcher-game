@@ -46,8 +46,10 @@ const PlayCanvas = (): JSX.Element => {
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
+  const [itemX, setItemX] = useState(0)
+  const [itemY, setItemY] = useState(0)
 
-  console.log(setScore)
+  console.log(setScore, setItemX, setItemY)
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -161,20 +163,29 @@ const PlayCanvas = (): JSX.Element => {
         // Random initial positon of the item
         const initialItemX = random(0, canvasWidth - itemWidth)
         // const initialItemY = 0 - itemHeight
+        const initialItemY = 0
 
         // Draw the item
         img.onload = () => {
-          // if (isStartResumeTimerActive && !isGameInProgress) {
-          //   setBoatX(initialBoatX)
-          // } else if (isStartResumeTimerActive && isGameInProgress && isGamePaused) {
-          //   setBoatX(tempBoatX)
-          // }
+          if (isStartResumeTimerActive && !isGameInProgress && itemX === 0 && itemY === 0) {
+            setItemX(initialItemX)
+            setItemY(initialItemY)
+          }
 
-          ctx.drawImage(img, initialItemX, 0, itemWidth, itemHeight)
+          ctx.drawImage(img, itemX, itemY, itemWidth, itemHeight)
         }
       }
     }
-  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, tempBoatX])
+  }, [
+    canvasRef,
+    isStartResumeTimerActive,
+    isGamePaused,
+    isGameInProgress,
+    boatX,
+    tempBoatX,
+    itemX,
+    itemY
+  ])
 
   // control of the audio
   useEffect(() => {
