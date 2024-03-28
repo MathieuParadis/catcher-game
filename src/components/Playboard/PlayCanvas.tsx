@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // LODASH IMPORTSs
-import { noop, random } from 'lodash'
+import { noop, random, sample } from 'lodash'
 
 // MUI ICONS IMPORTS
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
@@ -14,6 +14,9 @@ import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
 
 // COMPONENTS
 import Timer from './Timer'
+
+// TYPES IMPORTS
+import type { ItemType } from '../../types/itemsType'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
@@ -36,7 +39,6 @@ import checkCatch from '../../utils/checkCatch'
 
 // ASSETS IMPORTS
 import boatImg from '../../assets/image/boat.png'
-import p1 from '../../assets/image/p1.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
 // DATA IMPORTS
@@ -58,6 +60,7 @@ const PlayCanvas = (): JSX.Element => {
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
+  const [item, setItem] = useState<ItemType>()
   const [itemX, setItemX] = useState(0)
   const [itemY, setItemY] = useState(0)
 
@@ -163,16 +166,20 @@ const PlayCanvas = (): JSX.Element => {
     tempBoatX
   ])
 
+  useEffect(() => {
+    setItem(sample(items))
+  }, [])
+
   // Draw items on canvas
   useEffect(() => {
-    if (canvasRef.current != null) {
+    if (canvasRef.current != null && item != null) {
       const ctx = canvasRef.current.getContext('2d')
       const animation = animationRef.current
 
       const animate = (): void => {
         if (canvasRef.current != null && ctx != null && animation != null) {
           const img = new Image()
-          img.src = p1
+          img.src = item.img
 
           // Calculate the width of the item (12.5% of canvas width)
           const canvasWidth = canvasRef.current.width
@@ -182,7 +189,7 @@ const PlayCanvas = (): JSX.Element => {
 
           // Random initial positon of the item
           const initialItemX = random(0, canvasWidth - itemWidth)
-          const initialItemY = 0
+          const initialItemY = 0 - itemHeight
 
           // Draw the item
           img.onload = () => {
@@ -231,7 +238,8 @@ const PlayCanvas = (): JSX.Element => {
     tempBoatX,
     itemX,
     itemY,
-    score
+    score,
+    item
   ])
 
   // control of the audio
