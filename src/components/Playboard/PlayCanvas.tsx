@@ -61,8 +61,6 @@ const PlayCanvas = (): JSX.Element => {
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
   const [item, setItem] = useState<ItemType>()
-  const [itemX, setItemX] = useState(0)
-  const [itemY, setItemY] = useState(0)
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -104,7 +102,7 @@ const PlayCanvas = (): JSX.Element => {
     if (canvasRef.current != null) {
       const rect = canvasRef.current.getBoundingClientRect()
       const canvasWidth = canvasRef.current.width
-      const boatWidth = canvasWidth * 0.2 // Assuming boat width is 20% of canvas width
+      const boatWidth = canvasWidth * 0.2
 
       // Calculate the mouse position relative to the canvas
       const mouseX = (event.clientX - rect.left) * (canvasWidth / rect.width)
@@ -193,27 +191,31 @@ const PlayCanvas = (): JSX.Element => {
 
           // Draw the item
           img.onload = () => {
-            if (isStartResumeTimerActive && !isGameInProgress && itemX === 0 && itemY === 0) {
-              setItemX(initialItemX)
-              setItemY(initialItemY)
+            if (isStartResumeTimerActive && !isGameInProgress && item.x === 0 && item.y === 0) {
+              setItem({ ...item, x: initialItemX, y: initialItemY })
             } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
-              setItemY(itemY + 0.09)
+              setItem({ ...item, y: item.y + 0.01 })
             }
-            ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
-            ctx.drawImage(img, itemX, itemY, itemWidth, itemHeight)
+
+            ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
+            ctx.drawImage(img, item.x, item.y, itemWidth, itemHeight)
 
             // Check for collision
             if (
               checkCatch({
                 obj1: boat,
-                obj2: { x: itemX, y: itemY, w: itemWidth, h: itemHeight }
+                obj2: item
               })
             ) {
               // Stop animation if needed
-              ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
-              setItemX(-canvasWidth)
-              setItemY(canvasHeight)
-              setScore(score + 50)
+              ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
+              setItem({
+                ...item,
+                x: -canvasWidth,
+                y: canvasHeight,
+                speed: 0
+              })
+              setScore(item.value)
             }
           }
         }
@@ -236,8 +238,6 @@ const PlayCanvas = (): JSX.Element => {
     isGameInProgress,
     boat,
     tempBoatX,
-    itemX,
-    itemY,
     score,
     item
   ])
