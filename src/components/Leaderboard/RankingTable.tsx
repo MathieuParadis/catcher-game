@@ -1,14 +1,36 @@
-// REACT IMPORT
-import React from 'react'
+// REACT IMPORTS
+import React, { useEffect, useState } from 'react'
+
+// // REACT LOADING IMPORT
+// import ReactLoading from 'react-loading'
+
+// // REACT TOAST IMPORTS
+// import toast from 'react-hot-toast'
 
 // TYPES IMPORTS
-import type { ScoreRecordType } from '../../types/ScoreRecordTypes'
+import type { ScoreRecordType } from '../../types/scoreRecordTypes'
+
+// API CALLS IMPORTS
+import { useGetScoresQuery } from '../../redux/services/score'
 
 // DATA IMPORTS
-import { ranking } from '../../data/ranking'
+// import { ranking } from '../../data/ranking'
 
 const RankingTable = (): JSX.Element => {
-  const sortedRanking = ranking.sort((a, b) => b.score - a.score)
+  const [scores, setScores] = useState<ScoreRecordType[]>()
+
+  const { data, isLoading, isFetching, isError } = useGetScoresQuery(null)
+
+  // useEffect(() => {
+  //   if (isError) {
+  //     toast.error('Enable to fetch data', { duration: 3000, id: 'error' })
+  //   } else toast.remove()
+  // })
+
+  useEffect(() => {
+    const sortedScores = data?.sort((a, b) => b.score - a.score)
+    setScores(sortedScores)
+  }, [data])
 
   return (
     <table className="min-w-full border-separate border-spacing-y-1.5">
@@ -20,7 +42,7 @@ const RankingTable = (): JSX.Element => {
         </tr>
       </thead>
       <tbody className="text-black overflow-y-scroll bg-gradient-to-b from-[var(--sky1-color)] to-[var(--sand-color)] font-medium">
-        {sortedRanking.map(
+        {scores?.map(
           (rank: ScoreRecordType, index: number): JSX.Element => (
             <tr key={index} className="">
               <td className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4 rounded-l-md">
