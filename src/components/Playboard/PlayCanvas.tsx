@@ -169,7 +169,7 @@ const PlayCanvas = (): JSX.Element => {
 
           // Random initial positon of the item
           const initialItemX = random(0, canvasWidth - itemWidth)
-          const initialItemY = 0 - itemHeight
+          const initialItemY = 0
 
           // Draw the item
           img.onload = () => {
@@ -301,7 +301,7 @@ const PlayCanvas = (): JSX.Element => {
             isPause={isGamePaused}
           />
           <canvas
-            className="absolute w-full h-full p-0 m-0"
+            className="absolute w-full h-full p-0 m-0 bg-black"
             ref={canvasRef}
             onMouseMove={noop}></canvas>
         </>
