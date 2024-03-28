@@ -33,6 +33,7 @@ import {
 
 // ASSETS IMPORTS
 import boat from '../../assets/image/boat.png'
+import p1 from '../../assets/image/p1.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
 const PlayCanvas = (): JSX.Element => {
@@ -143,6 +144,39 @@ const PlayCanvas = (): JSX.Element => {
     }
   }, [canvasRef, isStartResumeTimerActive, boatX, isGamePaused, isGameInProgress, tempBoatX])
 
+  // Draw items on canvas
+  useEffect(() => {
+    if (canvasRef.current != null) {
+      const ctx = canvasRef.current.getContext('2d')
+
+      if (ctx != null) {
+        const img = new Image()
+        img.src = p1
+
+        // Calculate the width of the item (12.5% of canvas width)
+        const canvasWidth = canvasRef.current.width
+        const itemWidth = canvasWidth * 0.125
+        const itemHeight = itemWidth * 1
+
+        // Initial positon of the boat
+        // Calculate the position to draw the boat in the middle
+        // const initialBoatX = (canvasWidth - boatWidth) / 2
+        // const initialBoatY = canvasHeight
+
+        // Draw the boat
+        img.onload = () => {
+          // if (isStartResumeTimerActive && !isGameInProgress) {
+          //   setBoatX(initialBoatX)
+          // } else if (isStartResumeTimerActive && isGameInProgress && isGamePaused) {
+          //   setBoatX(tempBoatX)
+          // }
+
+          ctx.drawImage(img, 0, 0, itemWidth, itemHeight)
+        }
+      }
+    }
+  }, [canvasRef, isStartResumeTimerActive, boatX, isGamePaused, isGameInProgress, tempBoatX])
+
   // control of the audio
   useEffect(() => {
     if (!isStartResumeTimerActive) {
@@ -189,11 +223,11 @@ const PlayCanvas = (): JSX.Element => {
       {isStartResumeTimerActive && (
         <>
           {/* Overlay */}
-          <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
+          <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70 z-10"></div>
 
           {/* Content */}
           <Timer
-            className="z-10 mb-[60px] md:mb-[80px] lg:mb-[100px]"
+            className="z-20 mb-[60px] md:mb-[80px] lg:mb-[100px]"
             textClassName="text-[80px] md:text-[140px] lg:text-[200px] mb-[40px] md:mb-[60px] lg:mb-[60px] text-white"
             countdownSeconds={3}
             onExpire={turnOffStartTimer}
