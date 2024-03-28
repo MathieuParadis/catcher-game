@@ -233,21 +233,6 @@ const PlayCanvas = (): JSX.Element => {
               })
               setScore(Math.max(0, score + item.value))
             }
-
-            // if item ouf of canvas, a new one is generated
-            if (
-              !checkCollision({
-                obj1: {
-                  x: 0,
-                  y: 0,
-                  w: canvasWidth,
-                  h: canvasHeight
-                },
-                obj2: item
-              })
-            ) {
-              setDropNewItem(true)
-            }
           }
         }
       }
@@ -273,6 +258,28 @@ const PlayCanvas = (): JSX.Element => {
     item,
     dropNewItem
   ])
+
+  // check if item out of canvas
+  useEffect(() => {
+    if (canvasRef.current != null && item != null) {
+      const canvasWidth = canvasRef.current.width
+      const canvasHeight = canvasRef.current.height
+
+      if (
+        !checkCollision({
+          obj1: {
+            x: 0,
+            y: 0,
+            w: canvasWidth,
+            h: canvasHeight
+          },
+          obj2: item
+        })
+      ) {
+        setDropNewItem(true)
+      }
+    }
+  }, [item])
 
   // control of the audio
   useEffect(() => {
