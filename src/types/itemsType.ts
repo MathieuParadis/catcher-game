@@ -1,5 +1,4 @@
 export interface ItemType {
-  id: number | string
   img: string
   value: number
 }
