@@ -31,6 +31,9 @@ import {
   handleResetPlayModeSettings
 } from '../../redux/slices/playModeSlice'
 
+// UTILS IMPORTS
+import checkCatch from '../../utils/checkCatch'
+
 // ASSETS IMPORTS
 import boat from '../../assets/image/boat.png'
 import p1 from '../../assets/image/p1.png'

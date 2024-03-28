@@ -13,6 +13,7 @@ interface Props {
 	}
 }
 
+// check collision between 2 objects on canvas (Y axis is reversed)
 const checkCatch = ({ obj1, obj2 }: Props): boolean => {
 	return (
 		obj1.x < obj2.x + obj2.w &&
