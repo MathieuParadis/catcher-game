@@ -1,7 +1,7 @@
 // REACT IMPORTS
 import React, { useEffect, useRef, useState } from 'react'
 
-// LODASH IMPORTSs
+// LODASH IMPORTS
 import { noop, random } from 'lodash'
 
 // MUI ICONS IMPORTS
@@ -16,7 +16,7 @@ import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
 import Timer from './Timer'
 
 // TYPES IMPORTS
-import type { ItemType, ItemWithPositionType } from '../../types/itemsType'
+import type { ItemWithPositionType } from '../../types/itemsType'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
@@ -36,6 +36,7 @@ import {
 
 // UTILS IMPORTS
 import checkCollision from '../../utils/checkCollision'
+import generateRandomItem from '../../utils/generateRandomItem'
 
 // ASSETS IMPORTS
 import boatImg from '../../assets/image/boat.png'
@@ -118,24 +119,6 @@ const PlayCanvas = (): JSX.Element => {
     }
   }
 
-  const generateRandomItem = (
-    x: number,
-    y: number,
-    w: number,
-    h: number,
-    items: ItemType[]
-  ): ItemWithPositionType => {
-    const randomIndex = random(0, items.length - 1, false)
-    return {
-      ...items[randomIndex],
-      x,
-      y,
-      w,
-      h,
-      speed: random(0.05, 0.5, true)
-    }
-  }
-
   // Draw boat on canvas
   useEffect(() => {
     if (canvasRef.current != null) {
@@ -201,13 +184,13 @@ const PlayCanvas = (): JSX.Element => {
         const initialItemX = random(0, canvasWidth - itemWidth)
         const initialItemY = 0 - itemHeight
 
-        const initialItem = generateRandomItem(
-          initialItemX,
-          initialItemY,
-          itemWidth,
-          itemHeight,
+        const initialItem = generateRandomItem({
+          x: initialItemX,
+          y: initialItemY,
+          w: itemWidth,
+          h: itemHeight,
           items
-        )
+        })
         setItem(initialItem)
         setDropNewItem(false)
       }
