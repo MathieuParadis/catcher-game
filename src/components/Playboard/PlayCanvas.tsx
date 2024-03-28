@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // LODASH IMPORTSs
-import { noop, random, sample } from 'lodash'
+import { noop, random } from 'lodash'
 
 // MUI ICONS IMPORTS
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
@@ -16,7 +16,7 @@ import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
 import Timer from './Timer'
 
 // TYPES IMPORTS
-import type { ItemType } from '../../types/itemsType'
+import type { ItemWithPositionType } from '../../types/itemsType'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
@@ -60,7 +60,7 @@ const PlayCanvas = (): JSX.Element => {
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
-  const [item, setItem] = useState<ItemType>()
+  const [item, setItem] = useState<ItemWithPositionType>()
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -165,7 +165,14 @@ const PlayCanvas = (): JSX.Element => {
   ])
 
   useEffect(() => {
-    setItem(sample(items))
+    setItem({
+      ...items[random(0, items.length, false)],
+      x: 0,
+      y: 0,
+      w: 0,
+      h: 0,
+      speed: random(0.02, 0.15, true)
+    })
   }, [])
 
   // Draw items on canvas
@@ -194,9 +201,9 @@ const PlayCanvas = (): JSX.Element => {
             if (isStartResumeTimerActive && !isGameInProgress && item.x === 0 && item.y === 0) {
               setItem({ ...item, x: initialItemX, y: initialItemY, w: itemWidth, h: itemHeight })
             } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
-              setItem({ ...item, y: item.y + 0.09, w: itemWidth, h: itemHeight })
+              setItem({ ...item, y: item.y + item.speed, w: itemWidth, h: itemHeight })
             } else {
-              setItem({ ...item, w: itemWidth, h: itemHeight, speed: 0 })
+              setItem({ ...item, w: itemWidth, h: itemHeight })
             }
 
             ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
@@ -214,8 +221,7 @@ const PlayCanvas = (): JSX.Element => {
               setItem({
                 ...item,
                 x: -canvasWidth,
-                y: canvasHeight,
-                speed: 0
+                y: canvasHeight
               })
               setScore(item.value)
             }

@@ -13,61 +13,31 @@ export const items: ItemType[] = [
   {
     id: 'p1',
     img: p1,
-    value: 50,
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
-    speed: 0
+    value: 50
   },
   {
     id: 'p2',
     img: p2,
-    value: 50,
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
-    speed: 0
+    value: 50
   },
   {
     id: 'p3',
     img: p3,
-    value: 50,
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
-    speed: 0
+    value: 50
   },
   {
     id: 'p4',
     img: p4,
-    value: 50,
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
-    speed: 0
+    value: 50
   },
   {
     id: 'e1',
     img: e1,
-    value: -100,
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
-    speed: 0
+    value: -100
   },
   {
     id: 'e2',
     img: e2,
-    value: -100,
-    x: 0,
-    y: 0,
-    w: 0,
-    h: 0,
-    speed: 0
+    value: -100
   }
 ]
