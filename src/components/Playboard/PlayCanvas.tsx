@@ -216,7 +216,7 @@ const PlayCanvas = (): JSX.Element => {
                 obj2: item
               })
             ) {
-              // Stop animation if needed
+              // clear item on canvas and sending it out
               ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
               setItem({
                 ...item,
