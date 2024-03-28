@@ -42,7 +42,7 @@ import boatImg from '../../assets/image/boat.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
 // DATA IMPORTS
-import { items } from '../../data/items'
+import { items as imgItems } from '../../data/items'
 
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
@@ -166,7 +166,7 @@ const PlayCanvas = (): JSX.Element => {
 
   useEffect(() => {
     setItem({
-      ...items[random(0, items.length, false)],
+      ...imgItems[random(0, imgItems.length, false)],
       x: 0,
       y: 0,
       w: 0,
