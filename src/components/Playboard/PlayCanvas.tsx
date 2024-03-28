@@ -162,6 +162,7 @@ const PlayCanvas = (): JSX.Element => {
 
           // Calculate the width of the item (12.5% of canvas width)
           const canvasWidth = canvasRef.current.width
+          const canvasHeight = canvasRef.current.height
           const itemWidth = canvasWidth * 0.125
           const itemHeight = itemWidth * 1
           const boatWidth = canvasWidth * 0.2
@@ -186,13 +187,13 @@ const PlayCanvas = (): JSX.Element => {
             if (
               checkCatch({
                 obj1: { x: boatX, y: boatY, w: boatWidth, h: boatHeight },
-                obj2: { x: itemX, y: itemX, w: itemWidth, h: itemHeight }
+                obj2: { x: itemX, y: itemY, w: itemWidth, h: itemHeight }
               })
             ) {
               // Stop animation if needed
               ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
-              setItemX(0)
-              setItemY(0)
+              setItemX(-canvasWidth)
+              setItemY(canvasHeight)
               setScore(score + 50)
             }
           }
@@ -301,7 +302,7 @@ const PlayCanvas = (): JSX.Element => {
             isPause={isGamePaused}
           />
           <canvas
-            className="absolute w-full h-full p-0 m-0 bg-black"
+            className="absolute w-full h-full p-0 m-0"
             ref={canvasRef}
             onMouseMove={noop}></canvas>
         </>
