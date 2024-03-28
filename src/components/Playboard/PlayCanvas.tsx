@@ -39,6 +39,9 @@ import boat from '../../assets/image/boat.png'
 import p1 from '../../assets/image/p1.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
+// DATA IMPORTS
+import { items } from '../../data/items'
+
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
   const playMode = useAppSelector(selectPlayModeState)
