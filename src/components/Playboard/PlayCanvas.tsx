@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // LODASH IMPORTSs
-import { noop } from 'lodash'
+import { noop, random } from 'lodash'
 
 // MUI ICONS IMPORTS
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
@@ -33,6 +33,7 @@ import {
 
 // ASSETS IMPORTS
 import boat from '../../assets/image/boat.png'
+import p1 from '../../assets/image/p1.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
 const PlayCanvas = (): JSX.Element => {
@@ -40,13 +41,16 @@ const PlayCanvas = (): JSX.Element => {
   const playMode = useAppSelector(selectPlayModeState)
   const { isStartResumeTimerActive, isGameInProgress, isGamePaused, isMusicOn } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animationRef = useRef(0)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [boatX, setBoatX] = useState(0)
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
+  const [itemX, setItemX] = useState(0)
+  const [itemY, setItemY] = useState(0)
 
-  console.log(setScore)
+  console.log(setScore, setItemX, setItemY)
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -103,6 +107,7 @@ const PlayCanvas = (): JSX.Element => {
     }
   }
 
+  // Draw boat on canvas
   useEffect(() => {
     if (canvasRef.current != null) {
       const ctx = canvasRef.current.getContext('2d')
@@ -135,13 +140,69 @@ const PlayCanvas = (): JSX.Element => {
             setBoatX(tempBoatX)
           }
 
-          ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+          // ctx.clearRect(0, 0, canvasWidth, canvasHeight)
           ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
         }
       }
     }
-  }, [canvasRef, isStartResumeTimerActive, boatX, isGamePaused, isGameInProgress, tempBoatX])
+  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, tempBoatX])
 
+  // Draw items on canvas
+  useEffect(() => {
+    if (canvasRef.current != null) {
+      const ctx = canvasRef.current.getContext('2d')
+      const animation = animationRef.current
+
+      const animate = (): void => {
+        if (canvasRef.current != null && ctx != null && animation != null) {
+          const img = new Image()
+          img.src = p1
+
+          // Calculate the width of the item (12.5% of canvas width)
+          const canvasWidth = canvasRef.current.width
+          const itemWidth = canvasWidth * 0.125
+          const itemHeight = itemWidth * 1
+
+          // Random initial positon of the item
+          const initialItemX = random(0, canvasWidth - itemWidth)
+          const initialItemY = 0 - itemHeight
+
+          // Draw the item
+          img.onload = () => {
+            if (isStartResumeTimerActive && !isGameInProgress && itemX === 0 && itemY === 0) {
+              setItemX(initialItemX)
+              setItemY(initialItemY)
+            } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
+              setItemY(itemY + 0.02)
+            }
+            ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
+            ctx.drawImage(img, itemX, itemY, itemWidth, itemHeight)
+          }
+        }
+      }
+
+      // Start animation loop
+      animate()
+
+      // Clean up function
+      return () => {
+        if (animation != null) {
+          cancelAnimationFrame(animation)
+        }
+      }
+    }
+  }, [
+    canvasRef,
+    isStartResumeTimerActive,
+    isGamePaused,
+    isGameInProgress,
+    boatX,
+    tempBoatX,
+    itemX,
+    itemY
+  ])
+
+  // control of the audio
   useEffect(() => {
     if (!isStartResumeTimerActive) {
       if (audioRef.current != null) {
@@ -187,11 +248,11 @@ const PlayCanvas = (): JSX.Element => {
       {isStartResumeTimerActive && (
         <>
           {/* Overlay */}
-          <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70"></div>
+          <div className="absolute top-0 left-0 h-full w-full bg-gray-700 opacity-70 z-10"></div>
 
           {/* Content */}
           <Timer
-            className="z-10 mb-[60px] md:mb-[80px] lg:mb-[100px]"
+            className="z-20 mb-[60px] md:mb-[80px] lg:mb-[100px]"
             textClassName="text-[80px] md:text-[140px] lg:text-[200px] mb-[40px] md:mb-[60px] lg:mb-[60px] text-white"
             countdownSeconds={3}
             onExpire={turnOffStartTimer}
