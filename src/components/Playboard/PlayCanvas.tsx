@@ -16,7 +16,7 @@ import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
 import Timer from './Timer'
 
 // TYPES IMPORTS
-import type { ItemWithPositionType } from '../../types/itemsType'
+import type { ItemType, ItemWithPositionType } from '../../types/itemsType'
 
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
@@ -35,14 +35,14 @@ import {
 } from '../../redux/slices/playModeSlice'
 
 // UTILS IMPORTS
-import checkCatch from '../../utils/checkCatch'
+import checkCollision from '../../utils/checkCollision'
 
 // ASSETS IMPORTS
 import boatImg from '../../assets/image/boat.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
 // DATA IMPORTS
-import { items as imgItems } from '../../data/items'
+import { items } from '../../data/items'
 
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
@@ -118,10 +118,16 @@ const PlayCanvas = (): JSX.Element => {
     }
   }
 
-  const generateRandomItem = (x: number, y: number, w: number, h: number): ItemWithPositionType => {
-    const randomIndex = random(0, imgItems.length - 1, false)
+  const generateRandomItem = (
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    items: ItemType[]
+  ): ItemWithPositionType => {
+    const randomIndex = random(0, items.length - 1, false)
     return {
-      ...imgItems[randomIndex],
+      ...items[randomIndex],
       x,
       y,
       w,
@@ -195,7 +201,13 @@ const PlayCanvas = (): JSX.Element => {
         const initialItemX = random(0, canvasWidth - itemWidth)
         const initialItemY = 0 - itemHeight
 
-        const initialItem = generateRandomItem(initialItemX, initialItemY, itemWidth, itemHeight)
+        const initialItem = generateRandomItem(
+          initialItemX,
+          initialItemY,
+          itemWidth,
+          itemHeight,
+          items
+        )
         setItem(initialItem)
         setDropNewItem(false)
       }
@@ -227,8 +239,8 @@ const PlayCanvas = (): JSX.Element => {
             ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
             ctx.drawImage(img, item.x, item.y, itemWidth, itemHeight)
 
-            // Check for collision
-            if (checkCatch({ obj1: boat, obj2: item })) {
+            // Check for catch
+            if (checkCollision({ obj1: boat, obj2: item })) {
               // clear item on canvas and sending it out
               ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
               setItem({
@@ -236,12 +248,12 @@ const PlayCanvas = (): JSX.Element => {
                 x: -canvasWidth,
                 y: canvasHeight
               })
-              setScore(score + item.value)
+              setScore(Math.max(0, score + item.value))
             }
 
             // if item ouf of canvas, a new one is generated
             if (
-              !checkCatch({
+              !checkCollision({
                 obj1: {
                   x: 0,
                   y: 0,
