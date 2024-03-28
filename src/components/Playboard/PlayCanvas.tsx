@@ -103,6 +103,7 @@ const PlayCanvas = (): JSX.Element => {
     }
   }
 
+  // Draw boat on canvas
   useEffect(() => {
     if (canvasRef.current != null) {
       const ctx = canvasRef.current.getContext('2d')
@@ -142,6 +143,7 @@ const PlayCanvas = (): JSX.Element => {
     }
   }, [canvasRef, isStartResumeTimerActive, boatX, isGamePaused, isGameInProgress, tempBoatX])
 
+  // control of the audio
   useEffect(() => {
     if (!isStartResumeTimerActive) {
       if (audioRef.current != null) {
