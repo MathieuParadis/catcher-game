@@ -15,6 +15,9 @@ import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined'
 // COMPONENTS
 import Timer from './Timer'
 
+// TYPES IMPORTS
+import type { ItemWithPositionType } from '../../types/itemsType'
+
 // REDUX IMPORTS
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
@@ -31,10 +34,15 @@ import {
   handleResetPlayModeSettings
 } from '../../redux/slices/playModeSlice'
 
+// UTILS IMPORTS
+import checkCatch from '../../utils/checkCatch'
+
 // ASSETS IMPORTS
-import boat from '../../assets/image/boat.png'
-import p1 from '../../assets/image/p1.png'
+import boatImg from '../../assets/image/boat.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
+
+// DATA IMPORTS
+import { items } from '../../data/items'
 
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
@@ -43,14 +51,16 @@ const PlayCanvas = (): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef(0)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const [boatX, setBoatX] = useState(0)
+  const [boat, setBoat] = useState({
+    x: 5000,
+    y: 5000,
+    w: 0,
+    h: 0
+  })
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
-  const [itemX, setItemX] = useState(0)
-  const [itemY, setItemY] = useState(0)
-
-  console.log(setScore, setItemX, setItemY)
+  const [item, setItem] = useState<ItemWithPositionType>()
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -71,7 +81,7 @@ const PlayCanvas = (): JSX.Element => {
 
   const pauseGame = (): void => {
     dispatch(handlePauseGame())
-    setTempBoatX(boatX)
+    setTempBoatX(boat.x)
 
     if (audioRef.current != null) {
       audioRef.current?.pause()
@@ -92,7 +102,7 @@ const PlayCanvas = (): JSX.Element => {
     if (canvasRef.current != null) {
       const rect = canvasRef.current.getBoundingClientRect()
       const canvasWidth = canvasRef.current.width
-      const boatWidth = canvasWidth * 0.2 // Assuming boat width is 20% of canvas width
+      const boatWidth = canvasWidth * 0.2
 
       // Calculate the mouse position relative to the canvas
       const mouseX = (event.clientX - rect.left) * (canvasWidth / rect.width)
@@ -103,7 +113,7 @@ const PlayCanvas = (): JSX.Element => {
       newBoatX = Math.min(canvasWidth - boatWidth, newBoatX)
 
       // Update the boat's X position
-      setBoatX(newBoatX)
+      setBoat({ ...boat, x: newBoatX })
     }
   }
 
@@ -119,7 +129,7 @@ const PlayCanvas = (): JSX.Element => {
 
       if (ctx != null) {
         const img = new Image()
-        img.src = boat
+        img.src = boatImg
 
         // Calculate the width of the boat (20% of canvas width)
         const canvasWidth = canvasRef.current.width
@@ -135,31 +145,50 @@ const PlayCanvas = (): JSX.Element => {
         // Draw the boat
         img.onload = () => {
           if (isStartResumeTimerActive && !isGameInProgress) {
-            setBoatX(initialBoatX)
+            setBoat({ x: initialBoatX, y: initialBoatY, w: boatWidth, h: boatHeight })
           } else if (isStartResumeTimerActive && isGameInProgress && isGamePaused) {
-            setBoatX(tempBoatX)
+            setBoat({ x: tempBoatX, y: initialBoatY, w: boatWidth, h: boatHeight })
           }
 
-          // ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-          ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
+          ctx.drawImage(img, boat.x, boat.y, boatWidth, boatHeight)
         }
       }
     }
-  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, tempBoatX])
+  }, [
+    canvasRef,
+    isStartResumeTimerActive,
+    isGamePaused,
+    isGameInProgress,
+    boat.x,
+    boat.y,
+    tempBoatX
+  ])
+
+  useEffect(() => {
+    setItem({
+      ...items[random(0, items.length, false)],
+      x: 0,
+      y: 0,
+      w: 0,
+      h: 0,
+      speed: random(0.02, 0.15, true)
+    })
+  }, [])
 
   // Draw items on canvas
   useEffect(() => {
-    if (canvasRef.current != null) {
+    if (canvasRef.current != null && item != null) {
       const ctx = canvasRef.current.getContext('2d')
       const animation = animationRef.current
 
       const animate = (): void => {
         if (canvasRef.current != null && ctx != null && animation != null) {
           const img = new Image()
-          img.src = p1
+          img.src = item.img
 
           // Calculate the width of the item (12.5% of canvas width)
           const canvasWidth = canvasRef.current.width
+          const canvasHeight = canvasRef.current.height
           const itemWidth = canvasWidth * 0.125
           const itemHeight = itemWidth * 1
 
@@ -169,14 +198,33 @@ const PlayCanvas = (): JSX.Element => {
 
           // Draw the item
           img.onload = () => {
-            if (isStartResumeTimerActive && !isGameInProgress && itemX === 0 && itemY === 0) {
-              setItemX(initialItemX)
-              setItemY(initialItemY)
+            if (isStartResumeTimerActive && !isGameInProgress && item.x === 0 && item.y === 0) {
+              setItem({ ...item, x: initialItemX, y: initialItemY, w: itemWidth, h: itemHeight })
             } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
-              setItemY(itemY + 0.02)
+              setItem({ ...item, y: item.y + item.speed, w: itemWidth, h: itemHeight })
+            } else {
+              setItem({ ...item, w: itemWidth, h: itemHeight })
             }
-            ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
-            ctx.drawImage(img, itemX, itemY, itemWidth, itemHeight)
+
+            ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
+            ctx.drawImage(img, item.x, item.y, itemWidth, itemHeight)
+
+            // Check for collision
+            if (
+              checkCatch({
+                obj1: boat,
+                obj2: item
+              })
+            ) {
+              // clear item on canvas and sending it out
+              ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
+              setItem({
+                ...item,
+                x: -canvasWidth,
+                y: canvasHeight
+              })
+              setScore(item.value)
+            }
           }
         }
       }
@@ -196,10 +244,10 @@ const PlayCanvas = (): JSX.Element => {
     isStartResumeTimerActive,
     isGamePaused,
     isGameInProgress,
-    boatX,
+    boat,
     tempBoatX,
-    itemX,
-    itemY
+    score,
+    item
   ])
 
   // control of the audio
@@ -231,7 +279,28 @@ const PlayCanvas = (): JSX.Element => {
 
   return (
     <div className="relative w-full h-full flex justify-center items-center">
-      <div className="absolute flex gap-2 md:gap-4 lg:gap-8 top-2 md:top-4 lg:top-6 right-2 md:right-4 lg:right-6">
+      {/* Top buttons */}
+      <div className="absolute z-20 flex gap-2 md:gap-4 lg:gap-8 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6">
+        <button
+          className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+          onClick={turnMusicOnOff}>
+          {isMusicOn ? (
+            <VolumeUpOutlinedIcon fontSize="inherit" />
+          ) : (
+            <VolumeOffOutlinedIcon fontSize="inherit" />
+          )}
+        </button>
+        {!(isGamePaused || isStartResumeTimerActive) && (
+          <button
+            className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
+            onClick={pauseGame}>
+            <PauseOutlinedIcon fontSize="inherit" />
+          </button>
+        )}
+      </div>
+
+      {/* Score and timer */}
+      <div className="absolute z-20 flex gap-2 md:gap-4 lg:gap-8 top-2 md:top-4 lg:top-6 right-2 md:right-4 lg:right-6">
         <p className="flex justify-center items-center font1 text-2xl md:text-3xl lg:text-4xl text-white">
           Score: {score}
         </p>
@@ -244,6 +313,7 @@ const PlayCanvas = (): JSX.Element => {
           displayIcon={true}
         />
       </div>
+
       {/* Start & resume timer */}
       {isStartResumeTimerActive && (
         <>
@@ -271,22 +341,6 @@ const PlayCanvas = (): JSX.Element => {
           {/* ... and in progress */}
           {!isGamePaused && (
             <>
-              <div className="absolute flex gap-2 md:gap-4 lg:gap-8 z-10 top-2 md:top-4 lg:top-6 left-2 md:left-4 lg:left-6">
-                <button
-                  className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                  onClick={turnMusicOnOff}>
-                  {isMusicOn ? (
-                    <VolumeUpOutlinedIcon fontSize="inherit" />
-                  ) : (
-                    <VolumeOffOutlinedIcon fontSize="inherit" />
-                  )}
-                </button>
-                <button
-                  className="font1 w-[60px] md:w-[80px] lg:w-[110px] text-xl md:text-2xl lg:text-4xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                  onClick={pauseGame}>
-                  <PauseOutlinedIcon fontSize="inherit" />
-                </button>
-              </div>
               <canvas
                 className="w-full h-full p-0 m-0"
                 ref={canvasRef}
