@@ -118,16 +118,15 @@ const PlayCanvas = (): JSX.Element => {
     }
   }
 
-  const generateRandomItem = (): ItemWithPositionType => {
+  const generateRandomItem = (x: number, y: number, w: number, h: number): ItemWithPositionType => {
     const randomIndex = random(0, imgItems.length - 1, false)
     return {
       ...imgItems[randomIndex],
-      id: '',
-      x: 0,
-      y: 0,
-      w: 0,
-      h: 0,
-      speed: random(0.02, 0.2, true)
+      x,
+      y,
+      w,
+      h,
+      speed: random(0.05, 0.5, true)
     }
   }
 
@@ -178,15 +177,6 @@ const PlayCanvas = (): JSX.Element => {
     tempBoatX
   ])
 
-  // Generate items
-  useEffect(() => {
-    if (dropNewItem) {
-      const initialItem = generateRandomItem()
-      setItem(initialItem)
-      setDropNewItem(false)
-    }
-  }, [dropNewItem])
-
   // Draw items on canvas
   useEffect(() => {
     if (canvasRef.current != null) {
@@ -198,6 +188,17 @@ const PlayCanvas = (): JSX.Element => {
       const canvasHeight = canvasRef.current.height
       const itemWidth = canvasWidth * 0.125
       const itemHeight = itemWidth * 1
+
+      // Generate items
+      if (dropNewItem) {
+        // Random initial positon of the item
+        const initialItemX = random(0, canvasWidth - itemWidth)
+        const initialItemY = 0 - itemHeight
+
+        const initialItem = generateRandomItem(initialItemX, initialItemY, itemWidth, itemHeight)
+        setItem(initialItem)
+        setDropNewItem(false)
+      }
 
       const animate = (): void => {
         if (canvasRef.current != null && ctx != null && animation != null && item != null) {
@@ -274,7 +275,8 @@ const PlayCanvas = (): JSX.Element => {
     boat,
     tempBoatX,
     score,
-    item
+    item,
+    dropNewItem
   ])
 
   // control of the audio

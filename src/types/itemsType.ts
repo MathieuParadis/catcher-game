@@ -4,7 +4,6 @@ export interface ItemType {
 }
 
 export interface ItemWithPositionType extends ItemType {
-  id: number | string
   x: number
   y: number
   w: number
