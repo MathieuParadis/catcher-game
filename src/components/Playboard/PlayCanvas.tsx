@@ -1,7 +1,7 @@
 // REACT IMPORTS
 import React, { useEffect, useRef, useState } from 'react'
 
-// LODASH IMPORTSs
+// LODASH IMPORTS
 import { noop, random } from 'lodash'
 
 // MUI ICONS IMPORTS
@@ -35,14 +35,15 @@ import {
 } from '../../redux/slices/playModeSlice'
 
 // UTILS IMPORTS
-import checkCatch from '../../utils/checkCatch'
+import checkCollision from '../../utils/checkCollision'
+import generateRandomItem from '../../utils/generateRandomItem'
 
 // ASSETS IMPORTS
 import boatImg from '../../assets/image/boat.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
 // DATA IMPORTS
-import { items as imgItems } from '../../data/items'
+import { items } from '../../data/items'
 
 const PlayCanvas = (): JSX.Element => {
   const dispatch = useAppDispatch()
@@ -118,18 +119,6 @@ const PlayCanvas = (): JSX.Element => {
     }
   }
 
-  const generateRandomItem = (x: number, y: number, w: number, h: number): ItemWithPositionType => {
-    const randomIndex = random(0, imgItems.length - 1, false)
-    return {
-      ...imgItems[randomIndex],
-      x,
-      y,
-      w,
-      h,
-      speed: random(0.05, 0.5, true)
-    }
-  }
-
   // Draw boat on canvas
   useEffect(() => {
     if (canvasRef.current != null) {
@@ -195,7 +184,13 @@ const PlayCanvas = (): JSX.Element => {
         const initialItemX = random(0, canvasWidth - itemWidth)
         const initialItemY = 0 - itemHeight
 
-        const initialItem = generateRandomItem(initialItemX, initialItemY, itemWidth, itemHeight)
+        const initialItem = generateRandomItem({
+          x: initialItemX,
+          y: initialItemY,
+          w: itemWidth,
+          h: itemHeight,
+          items
+        })
         setItem(initialItem)
         setDropNewItem(false)
       }
@@ -227,8 +222,8 @@ const PlayCanvas = (): JSX.Element => {
             ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
             ctx.drawImage(img, item.x, item.y, itemWidth, itemHeight)
 
-            // Check for collision
-            if (checkCatch({ obj1: boat, obj2: item })) {
+            // Check for catch
+            if (checkCollision({ obj1: boat, obj2: item })) {
               // clear item on canvas and sending it out
               ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
               setItem({
@@ -236,22 +231,7 @@ const PlayCanvas = (): JSX.Element => {
                 x: -canvasWidth,
                 y: canvasHeight
               })
-              setScore(score + item.value)
-            }
-
-            // if item ouf of canvas, a new one is generated
-            if (
-              !checkCatch({
-                obj1: {
-                  x: 0,
-                  y: 0,
-                  w: canvasWidth,
-                  h: canvasHeight
-                },
-                obj2: item
-              })
-            ) {
-              setDropNewItem(true)
+              setScore(Math.max(0, score + item.value))
             }
           }
         }
@@ -273,11 +253,32 @@ const PlayCanvas = (): JSX.Element => {
     isGamePaused,
     isGameInProgress,
     boat,
-    tempBoatX,
     score,
     item,
     dropNewItem
   ])
+
+  // check if item out of canvas
+  useEffect(() => {
+    if (canvasRef.current != null && item != null) {
+      const canvasWidth = canvasRef.current.width
+      const canvasHeight = canvasRef.current.height
+
+      if (
+        !checkCollision({
+          obj1: {
+            x: 0,
+            y: 0,
+            w: canvasWidth,
+            h: canvasHeight
+          },
+          obj2: item
+        })
+      ) {
+        setDropNewItem(true)
+      }
+    }
+  }, [item])
 
   // control of the audio
   useEffect(() => {
