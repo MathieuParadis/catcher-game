@@ -60,7 +60,8 @@ const PlayCanvas = (): JSX.Element => {
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
-  const [items, setItems] = useState<ItemWithPositionType[]>([])
+  const [item, setItem] = useState<ItemWithPositionType>()
+  const [dropNewItem, setDropNewItem] = useState(true)
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -177,10 +178,14 @@ const PlayCanvas = (): JSX.Element => {
     tempBoatX
   ])
 
+  // Generate items
   useEffect(() => {
-    const initialItems = Array.from({ length: 5 }, () => generateRandomItem())
-    setItems(initialItems)
-  }, [])
+    if (dropNewItem) {
+      const initialItem = generateRandomItem()
+      setItem(initialItem)
+      setDropNewItem(false)
+    }
+  }, [dropNewItem])
 
   // Draw items on canvas
   useEffect(() => {
@@ -195,58 +200,61 @@ const PlayCanvas = (): JSX.Element => {
       const itemHeight = itemWidth * 1
 
       const animate = (): void => {
-        items.forEach((item) => {
-          if (canvasRef.current != null && ctx != null && animation != null) {
-            const img = new Image()
-            img.src = item.img
+        if (canvasRef.current != null && ctx != null && animation != null && item != null) {
+          const img = new Image()
+          img.src = item.img
 
-            // Random initial positon of the item
-            const initialItemX = random(0, canvasWidth - itemWidth)
-            const initialItemY = 0 - itemHeight
+          // Random initial positon of the item
+          const initialItemX = random(0, canvasWidth - itemWidth)
+          const initialItemY = 0 - itemHeight
 
-            // Draw the item
-            img.onload = () => {
-              if (isStartResumeTimerActive && !isGameInProgress && item.x === 0 && item.y === 0) {
-                setItems([
-                  { ...item, x: initialItemX, y: initialItemY, w: itemWidth, h: itemHeight }
-                ])
-              } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
-                setItems([
-                  {
-                    ...item,
-                    y: item.y + item.speed,
-                    w: itemWidth,
-                    h: itemHeight
-                  }
-                ])
-              } else {
-                setItems([{ ...item, w: itemWidth, h: itemHeight }])
-              }
+          // Draw the item
+          img.onload = () => {
+            if (isStartResumeTimerActive && !isGameInProgress && item.x === 0 && item.y === 0) {
+              setItem({ ...item, x: initialItemX, y: initialItemY, w: itemWidth, h: itemHeight })
+            } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
+              setItem({
+                ...item,
+                y: item.y + item.speed,
+                w: itemWidth,
+                h: itemHeight
+              })
+            } else {
+              setItem({ ...item, w: itemWidth, h: itemHeight })
+            }
 
+            ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
+            ctx.drawImage(img, item.x, item.y, itemWidth, itemHeight)
+
+            // Check for collision
+            if (checkCatch({ obj1: boat, obj2: item })) {
+              // clear item on canvas and sending it out
               ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
-              ctx.drawImage(img, item.x, item.y, itemWidth, itemHeight)
+              setItem({
+                ...item,
+                x: -canvasWidth,
+                y: canvasHeight
+              })
+              setScore(score + item.value)
+              // setDropNewItem(true)
+            }
 
-              // Check for collision
-              if (
-                checkCatch({
-                  obj1: boat,
-                  obj2: item
-                })
-              ) {
-                // clear item on canvas and sending it out
-                ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
-                setItems([
-                  {
-                    ...item,
-                    x: -canvasWidth,
-                    y: canvasHeight
-                  }
-                ])
-                setScore(item.value)
-              }
+            // Check for collision
+            if (
+              !checkCatch({
+                obj1: {
+                  x: 0,
+                  y: 0,
+                  w: canvasWidth,
+                  h: canvasHeight
+                },
+                obj2: item
+              })
+            ) {
+              setDropNewItem(true)
             }
           }
-        })
+        }
       }
 
       // Start animation loop
@@ -267,7 +275,7 @@ const PlayCanvas = (): JSX.Element => {
     boat,
     tempBoatX,
     score,
-    items
+    item
   ])
 
   // control of the audio
