@@ -18,7 +18,7 @@ export const items: ItemType[] = [
     y: 0,
     w: 0,
     h: 0,
-    speed: 0,
+    speed: 0
   },
   {
     id: 'p2',
@@ -28,7 +28,7 @@ export const items: ItemType[] = [
     y: 0,
     w: 0,
     h: 0,
-    speed: 0,
+    speed: 0
   },
   {
     id: 'p3',
@@ -38,7 +38,7 @@ export const items: ItemType[] = [
     y: 0,
     w: 0,
     h: 0,
-    speed: 0,
+    speed: 0
   },
   {
     id: 'p4',
@@ -48,7 +48,7 @@ export const items: ItemType[] = [
     y: 0,
     w: 0,
     h: 0,
-    speed: 0,
+    speed: 0
   },
   {
     id: 'e1',
@@ -58,7 +58,7 @@ export const items: ItemType[] = [
     y: 0,
     w: 0,
     h: 0,
-    speed: 0,
+    speed: 0
   },
   {
     id: 'e2',
@@ -68,6 +68,6 @@ export const items: ItemType[] = [
     y: 0,
     w: 0,
     h: 0,
-    speed: 0,
-  },
+    speed: 0
+  }
 ]

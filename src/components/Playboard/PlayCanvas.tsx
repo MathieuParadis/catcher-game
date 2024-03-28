@@ -35,7 +35,7 @@ import {
 import checkCatch from '../../utils/checkCatch'
 
 // ASSETS IMPORTS
-import boat from '../../assets/image/boat.png'
+import boatImg from '../../assets/image/boat.png'
 import p1 from '../../assets/image/p1.png'
 import music from '../../assets/audio/treasure_hunter.mp3'
 
@@ -49,8 +49,12 @@ const PlayCanvas = (): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef(0)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const [boatX, setBoatX] = useState(5000)
-  const [boatY, setBoatY] = useState(5000)
+  const [boat, setBoat] = useState({
+    x: 5000,
+    y: 5000,
+    w: 0,
+    h: 0
+  })
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
@@ -76,7 +80,7 @@ const PlayCanvas = (): JSX.Element => {
 
   const pauseGame = (): void => {
     dispatch(handlePauseGame())
-    setTempBoatX(boatX)
+    setTempBoatX(boat.x)
 
     if (audioRef.current != null) {
       audioRef.current?.pause()
@@ -108,7 +112,7 @@ const PlayCanvas = (): JSX.Element => {
       newBoatX = Math.min(canvasWidth - boatWidth, newBoatX)
 
       // Update the boat's X position
-      setBoatX(newBoatX)
+      setBoat({ ...boat, x: newBoatX })
     }
   }
 
@@ -124,7 +128,7 @@ const PlayCanvas = (): JSX.Element => {
 
       if (ctx != null) {
         const img = new Image()
-        img.src = boat
+        img.src = boatImg
 
         // Calculate the width of the boat (20% of canvas width)
         const canvasWidth = canvasRef.current.width
@@ -140,17 +144,24 @@ const PlayCanvas = (): JSX.Element => {
         // Draw the boat
         img.onload = () => {
           if (isStartResumeTimerActive && !isGameInProgress) {
-            setBoatX(initialBoatX)
-            setBoatY(initialBoatY)
+            setBoat({ x: initialBoatX, y: initialBoatY, w: boatWidth, h: boatHeight })
           } else if (isStartResumeTimerActive && isGameInProgress && isGamePaused) {
-            setBoatX(tempBoatX)
+            setBoat({ x: tempBoatX, y: initialBoatY, w: boatWidth, h: boatHeight })
           }
 
-          ctx.drawImage(img, boatX, boatY, boatWidth, boatHeight)
+          ctx.drawImage(img, boat.x, boat.y, boatWidth, boatHeight)
         }
       }
     }
-  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, boatY, tempBoatX])
+  }, [
+    canvasRef,
+    isStartResumeTimerActive,
+    isGamePaused,
+    isGameInProgress,
+    boat.x,
+    boat.y,
+    tempBoatX
+  ])
 
   // Draw items on canvas
   useEffect(() => {
@@ -189,7 +200,7 @@ const PlayCanvas = (): JSX.Element => {
             // Check for collision
             if (
               checkCatch({
-                obj1: { x: boatX, y: boatY, w: boatWidth, h: boatHeight },
+                obj1: { x: boat.x, y: boat.y, w: boatWidth, h: boatHeight },
                 obj2: { x: itemX, y: itemY, w: itemWidth, h: itemHeight }
               })
             ) {
@@ -218,8 +229,8 @@ const PlayCanvas = (): JSX.Element => {
     isStartResumeTimerActive,
     isGamePaused,
     isGameInProgress,
-    boatX,
-    boatY,
+    boat.x,
+    boat.y,
     tempBoatX,
     itemX,
     itemY,
