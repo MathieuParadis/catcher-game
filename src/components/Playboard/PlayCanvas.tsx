@@ -192,9 +192,11 @@ const PlayCanvas = (): JSX.Element => {
           // Draw the item
           img.onload = () => {
             if (isStartResumeTimerActive && !isGameInProgress && item.x === 0 && item.y === 0) {
-              setItem({ ...item, x: initialItemX, y: initialItemY })
+              setItem({ ...item, x: initialItemX, y: initialItemY, w: itemWidth, h: itemHeight })
             } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
-              setItem({ ...item, y: item.y + 0.01 })
+              setItem({ ...item, y: item.y + 0.09, w: itemWidth, h: itemHeight })
+            } else {
+              setItem({ ...item, w: itemWidth, h: itemHeight, speed: 0 })
             }
 
             ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
