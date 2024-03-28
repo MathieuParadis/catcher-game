@@ -61,6 +61,7 @@ const PlayCanvas = (): JSX.Element => {
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
   const [item, setItem] = useState<ItemWithPositionType>()
+  // const [items, setItems] = useState<ItemWithPositionType[]>([])
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -117,6 +118,17 @@ const PlayCanvas = (): JSX.Element => {
     }
   }
 
+  const generateRandomItem = (): ItemWithPositionType => {
+    return {
+      ...imgItems[random(0, imgItems.length, false)],
+      x: 0,
+      y: 0,
+      w: 0,
+      h: 0,
+      speed: random(0.02, 0.2, true)
+    }
+  }
+
   // Draw boat on canvas
   useEffect(() => {
     if (canvasRef.current != null) {
@@ -165,14 +177,10 @@ const PlayCanvas = (): JSX.Element => {
   ])
 
   useEffect(() => {
-    setItem({
-      ...imgItems[random(0, imgItems.length, false)],
-      x: 0,
-      y: 0,
-      w: 0,
-      h: 0,
-      speed: random(0.02, 0.15, true)
-    })
+    setItem(generateRandomItem())
+
+    // const initialItems = Array.from({ length: 5 }, () => generateRandomItem())
+    // setItems(initialItems)
   }, [])
 
   // Draw items on canvas
