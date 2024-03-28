@@ -46,15 +46,13 @@ const PlayCanvas = (): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationRef = useRef(0)
   const audioRef = useRef<HTMLAudioElement>(null)
-  const [boatX, setBoatX] = useState(0)
-  const [boatY, setBoatY] = useState(0)
+  const [boatX, setBoatX] = useState(5000)
+  const [boatY, setBoatY] = useState(5000)
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
   const [itemX, setItemX] = useState(0)
   const [itemY, setItemY] = useState(0)
-
-  console.log(setScore, setItemX, setItemY)
 
   const turnOffStartTimer = (): void => {
     dispatch(handleTurnOffStartTimer())
@@ -166,6 +164,8 @@ const PlayCanvas = (): JSX.Element => {
           const canvasWidth = canvasRef.current.width
           const itemWidth = canvasWidth * 0.125
           const itemHeight = itemWidth * 1
+          const boatWidth = canvasWidth * 0.2
+          const boatHeight = boatWidth * 1.23
 
           // Random initial positon of the item
           const initialItemX = random(0, canvasWidth - itemWidth)
@@ -177,10 +177,24 @@ const PlayCanvas = (): JSX.Element => {
               setItemX(initialItemX)
               setItemY(initialItemY)
             } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
-              setItemY(itemY + 0.02)
+              setItemY(itemY + 0.09)
             }
             ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
             ctx.drawImage(img, itemX, itemY, itemWidth, itemHeight)
+
+            // Check for collision
+            if (
+              checkCatch({
+                obj1: { x: boatX, y: boatY, w: boatWidth, h: boatHeight },
+                obj2: { x: itemX, y: itemX, w: itemWidth, h: itemHeight }
+              })
+            ) {
+              // Stop animation if needed
+              ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
+              setItemX(0)
+              setItemY(0)
+              setScore(score + 50)
+            }
           }
         }
       }
@@ -201,9 +215,11 @@ const PlayCanvas = (): JSX.Element => {
     isGamePaused,
     isGameInProgress,
     boatX,
+    boatY,
     tempBoatX,
     itemX,
-    itemY
+    itemY,
+    score
   ])
 
   // control of the audio
