@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // LODASH IMPORTSs
-import { noop } from 'lodash'
+import { noop, random } from 'lodash'
 
 // MUI ICONS IMPORTS
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
@@ -137,12 +137,12 @@ const PlayCanvas = (): JSX.Element => {
             setBoatX(tempBoatX)
           }
 
-          ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+          // ctx.clearRect(0, 0, canvasWidth, canvasHeight)
           ctx.drawImage(img, boatX, initialBoatY, boatWidth, boatHeight)
         }
       }
     }
-  }, [canvasRef, isStartResumeTimerActive, boatX, isGamePaused, isGameInProgress, tempBoatX])
+  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, tempBoatX])
 
   // Draw items on canvas
   useEffect(() => {
@@ -158,12 +158,11 @@ const PlayCanvas = (): JSX.Element => {
         const itemWidth = canvasWidth * 0.125
         const itemHeight = itemWidth * 1
 
-        // Initial positon of the boat
-        // Calculate the position to draw the boat in the middle
-        // const initialBoatX = (canvasWidth - boatWidth) / 2
-        // const initialBoatY = canvasHeight
+        // Random initial positon of the item
+        const initialItemX = random(0, canvasWidth - itemWidth)
+        // const initialItemY = 0 - itemHeight
 
-        // Draw the boat
+        // Draw the item
         img.onload = () => {
           // if (isStartResumeTimerActive && !isGameInProgress) {
           //   setBoatX(initialBoatX)
@@ -171,11 +170,11 @@ const PlayCanvas = (): JSX.Element => {
           //   setBoatX(tempBoatX)
           // }
 
-          ctx.drawImage(img, 0, 0, itemWidth, itemHeight)
+          ctx.drawImage(img, initialItemX, 0, itemWidth, itemHeight)
         }
       }
     }
-  }, [canvasRef, isStartResumeTimerActive, boatX, isGamePaused, isGameInProgress, tempBoatX])
+  }, [canvasRef, isStartResumeTimerActive, isGamePaused, isGameInProgress, boatX, tempBoatX])
 
   // control of the audio
   useEffect(() => {
