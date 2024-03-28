@@ -41,6 +41,7 @@ const PlayCanvas = (): JSX.Element => {
   const playMode = useAppSelector(selectPlayModeState)
   const { isStartResumeTimerActive, isGameInProgress, isGamePaused, isMusicOn } = playMode
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animationRef = useRef(0)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [boatX, setBoatX] = useState(0)
   const [tempBoatX, setTempBoatX] = useState(0)
@@ -151,28 +152,41 @@ const PlayCanvas = (): JSX.Element => {
     if (canvasRef.current != null) {
       const ctx = canvasRef.current.getContext('2d')
 
-      if (ctx != null) {
-        const img = new Image()
-        img.src = p1
+      const animate = (): void => {
+        if (canvasRef.current != null && ctx != null && animationRef.current != null) {
+          const img = new Image()
+          img.src = p1
 
-        // Calculate the width of the item (12.5% of canvas width)
-        const canvasWidth = canvasRef.current.width
-        const itemWidth = canvasWidth * 0.125
-        const itemHeight = itemWidth * 1
+          // Calculate the width of the item (12.5% of canvas width)
+          const canvasWidth = canvasRef.current.width
+          const itemWidth = canvasWidth * 0.125
+          const itemHeight = itemWidth * 1
 
-        // Random initial positon of the item
-        const initialItemX = random(0, canvasWidth - itemWidth)
-        // const initialItemY = 0 - itemHeight
-        const initialItemY = 0
+          // Random initial positon of the item
+          const initialItemX = random(0, canvasWidth - itemWidth)
+          const initialItemY = 0 - itemHeight
 
-        // Draw the item
-        img.onload = () => {
-          if (isStartResumeTimerActive && !isGameInProgress && itemX === 0 && itemY === 0) {
-            setItemX(initialItemX)
-            setItemY(initialItemY)
+          // Draw the item
+          img.onload = () => {
+            if (isStartResumeTimerActive && !isGameInProgress && itemX === 0 && itemY === 0) {
+              setItemX(initialItemX)
+              setItemY(initialItemY)
+            } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
+              setItemY(itemY + 0.02)
+            }
+            ctx.clearRect(itemX, itemY, itemWidth, itemHeight)
+            ctx.drawImage(img, itemX, itemY, itemWidth, itemHeight)
           }
+        }
+      }
 
-          ctx.drawImage(img, itemX, itemY, itemWidth, itemHeight)
+      // Start animation loop
+      animate()
+
+      // Clean up function
+      return () => {
+        if (animationRef.current != null) {
+          cancelAnimationFrame(animationRef.current)
         }
       }
     }
