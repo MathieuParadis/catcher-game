@@ -236,10 +236,9 @@ const PlayCanvas = (): JSX.Element => {
                 y: canvasHeight
               })
               setScore(score + item.value)
-              // setDropNewItem(true)
             }
 
-            // Check for collision
+            // if item ouf of canvas, a new one is generated
             if (
               !checkCatch({
                 obj1: {
