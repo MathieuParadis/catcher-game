@@ -60,7 +60,6 @@ const PlayCanvas = (): JSX.Element => {
   const [tempBoatX, setTempBoatX] = useState(0)
   const [score, setScore] = useState(0)
   const [tempMusicCurrentTime, setTempMusicCurrentTime] = useState(0)
-  // const [item, setItem] = useState<ItemWithPositionType[]>([])
   const [items, setItems] = useState<ItemWithPositionType[]>([])
 
   const turnOffStartTimer = (): void => {
@@ -185,15 +184,15 @@ const PlayCanvas = (): JSX.Element => {
 
   // Draw items on canvas
   useEffect(() => {
-    items.forEach((ite) => {
-      if (canvasRef.current != null && ite != null) {
+    items.forEach((item) => {
+      if (canvasRef.current != null) {
         const ctx = canvasRef.current.getContext('2d')
         const animation = animationRef.current
 
         const animate = (): void => {
           if (canvasRef.current != null && ctx != null && animation != null) {
             const img = new Image()
-            img.src = ite.img
+            img.src = item.img
 
             // Calculate the width of the item (12.5% of canvas width)
             const canvasWidth = canvasRef.current.width
@@ -207,43 +206,43 @@ const PlayCanvas = (): JSX.Element => {
 
             // Draw the item
             img.onload = () => {
-              if (isStartResumeTimerActive && !isGameInProgress && ite.x === 0 && ite.y === 0) {
+              if (isStartResumeTimerActive && !isGameInProgress && item.x === 0 && item.y === 0) {
                 setItems([
-                  { ...ite, x: initialItemX, y: initialItemY, w: itemWidth, h: itemHeight }
+                  { ...item, x: initialItemX, y: initialItemY, w: itemWidth, h: itemHeight }
                 ])
               } else if (!isStartResumeTimerActive && isGameInProgress && !isGamePaused) {
                 setItems([
                   {
-                    ...ite,
-                    y: ite.y + ite.speed,
+                    ...item,
+                    y: item.y + item.speed,
                     w: itemWidth,
                     h: itemHeight
                   }
                 ])
               } else {
-                setItems([{ ...ite, w: itemWidth, h: itemHeight }])
+                setItems([{ ...item, w: itemWidth, h: itemHeight }])
               }
 
-              ctx.clearRect(ite.x, ite.y, itemWidth, itemHeight)
-              ctx.drawImage(img, ite.x, ite.y, itemWidth, itemHeight)
+              ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
+              ctx.drawImage(img, item.x, item.y, itemWidth, itemHeight)
 
               // Check for collision
               if (
                 checkCatch({
                   obj1: boat,
-                  obj2: ite
+                  obj2: item
                 })
               ) {
                 // clear item on canvas and sending it out
-                ctx.clearRect(ite.x, ite.y, itemWidth, itemHeight)
+                ctx.clearRect(item.x, item.y, itemWidth, itemHeight)
                 setItems([
                   {
-                    ...ite,
+                    ...item,
                     x: -canvasWidth,
                     y: canvasHeight
                   }
                 ])
-                setScore(ite.value)
+                setScore(item.value)
               }
             }
           }
