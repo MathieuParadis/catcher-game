@@ -20,7 +20,7 @@ const generateRandomItem = ({ x, y, w, h, items }: Props): ItemWithPositionType 
     y,
     w,
     h,
-    speed: random(0.05, 0.5, true)
+    speed: random(0.1, 0.4, true)
   }
 }
 

@@ -253,7 +253,6 @@ const PlayCanvas = (): JSX.Element => {
     isGamePaused,
     isGameInProgress,
     boat,
-    tempBoatX,
     score,
     item,
     dropNewItem
