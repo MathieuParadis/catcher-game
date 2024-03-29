@@ -8,12 +8,12 @@ import ReactLoading from 'react-loading'
 import type { ScoreRecordType } from '../../types/scoreRecordTypes'
 
 // API CALLS IMPORTS
-import { useGetScoresQuery } from '../../redux/services/score'
+import { useGetScoreRecordsQuery } from '../../redux/services/score'
 
 const ScoreTable = (): JSX.Element => {
   const [scores, setScores] = useState<ScoreRecordType[]>()
 
-  const { data, isLoading, isFetching, isError } = useGetScoresQuery(null)
+  const { data, isLoading, isFetching, isError } = useGetScoreRecordsQuery(null)
 
   useEffect(() => {
     if (data != null) {

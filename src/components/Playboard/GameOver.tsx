@@ -1,6 +1,8 @@
 // REACT IMPORTS
 import React, { useState } from 'react'
 
+import type { AddScoreRecordRequestType } from '../../types/scoreRecordTypes'
+
 // REDUX IMPORTS
 import { useAppDispatch } from '../../redux/hooks'
 import { handleBackToMainMenu } from '../../redux/slices/gameModeSlice'
@@ -8,6 +10,9 @@ import {
   handlePlayAgainWithoutRules,
   handleResetPlayModeSettings
 } from '../../redux/slices/playModeSlice'
+
+// API CALLS IMPORTS
+import { useCreateScoreRecordMutation } from '../../redux/services/score'
 
 interface Props {
   score: number
@@ -17,8 +22,31 @@ const GameOver = ({ score }: Props): JSX.Element => {
   const dispatch = useAppDispatch()
   const [playerName, setPlayerName] = useState('')
   const [isScoreSubmitted, setIsScoreSubmitted] = useState(false)
+  const [createScoreRecordTrigger] = useCreateScoreRecordMutation()
 
-  console.log(setIsScoreSubmitted)
+  const handleSubmit = async (e: { preventDefault: () => void }): Promise<void> => {
+    e.preventDefault()
+
+    if (playerName == null || playerName === '') {
+      return
+    }
+
+    const body: AddScoreRecordRequestType = {
+      playerName,
+      score
+    }
+
+    try {
+      await createScoreRecordTrigger(body).unwrap()
+      setIsScoreSubmitted(true)
+    } catch (error: any) {
+      console.error('An error occured:', error)
+    }
+  }
+
+  const submitForm = (e: { preventDefault: () => void }): void => {
+    void handleSubmit(e)
+  }
 
   const backToMainMenu = (): void => {
     dispatch(handleBackToMainMenu())
@@ -28,7 +56,6 @@ const GameOver = ({ score }: Props): JSX.Element => {
   const playAgain = (): void => {
     dispatch(handlePlayAgainWithoutRules())
   }
-
   return (
     <>
       {/* Overlay */}
@@ -61,7 +88,7 @@ const GameOver = ({ score }: Props): JSX.Element => {
                 />
                 <button
                   className="p-1 md:p-2 w-[120px] md:w-[160px] lg:w-[200px] font1 aspect-[379/200] text-white text-xl md:text-2xl lg:text-3xl bg-[url('../assets/image/woodboard.png')] bg-cover hover:scale-110"
-                  onClick={() => {}}>
+                  onClick={submitForm}>
                   Submit
                 </button>
               </form>
