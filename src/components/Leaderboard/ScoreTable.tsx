@@ -10,7 +10,7 @@ import type { ScoreRecordType } from '../../types/scoreRecordTypes'
 // API CALLS IMPORTS
 import { useGetScoresQuery } from '../../redux/services/score'
 
-const RankingTable = (): JSX.Element => {
+const ScoreTable = (): JSX.Element => {
   const [scores, setScores] = useState<ScoreRecordType[]>()
 
   // const { data, isLoading, isFetching, isError } = useGetScoresQuery(null)
@@ -69,4 +69,4 @@ const RankingTable = (): JSX.Element => {
   )
 }
 
-export default RankingTable
+export default ScoreTable

@@ -5,7 +5,7 @@ import React from 'react'
 import UndoOutlinedIcon from '@mui/icons-material/UndoOutlined'
 
 // COMPONENTS IMPORTS
-import RankingTable from './RankingTable'
+import ScoreTable from './ScoreTable'
 
 // REDUX IMPORTS
 import { useAppDispatch } from '../../redux/hooks'
@@ -40,7 +40,7 @@ const Leaderboard = (): JSX.Element => {
                 Ready to see where you stand?<br></br>Check out the top players below.
               </p>
               <div className="w-full flex justify-center">
-                <RankingTable />
+                <ScoreTable />
               </div>
             </div>
           </div>
