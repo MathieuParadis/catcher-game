@@ -23,12 +23,24 @@ const GameOver = ({ score, setScore }: Props): JSX.Element => {
   const dispatch = useAppDispatch()
   const [playerName, setPlayerName] = useState('')
   const [isScoreSubmitted, setIsScoreSubmitted] = useState(false)
+  const [isErrorForm, setIsErrorForm] = useState(false)
+  const [fieldError, setFieldError] = useState('')
   const [createScoreRecordTrigger] = useCreateScoreRecordMutation()
 
   const handleSubmit = async (e: { preventDefault: () => void }): Promise<void> => {
     e.preventDefault()
 
     if (playerName == null || playerName === '') {
+      setIsErrorForm(true)
+      setFieldError('Player name is missing')
+      return
+    } else if (playerName.length === 1) {
+      setIsErrorForm(true)
+      setFieldError('Player name is too short. 2 characters min')
+      return
+    } else if (playerName.length > 40) {
+      setIsErrorForm(true)
+      setFieldError('Player name is too long. 40 characters max')
       return
     }
 
@@ -58,6 +70,7 @@ const GameOver = ({ score, setScore }: Props): JSX.Element => {
   const playAgain = (): void => {
     dispatch(handlePlayAgainWithoutRules())
   }
+
   return (
     <>
       {/* Overlay */}
@@ -76,11 +89,13 @@ const GameOver = ({ score, setScore }: Props): JSX.Element => {
               <p className="text-2xl md:text-4xl lg:text-6xl font2 text-white text-center font-bold">
                 Your score: {score}
               </p>
-              <form className="flex flex-col justify-center items-center gap-1 md:gap-4 lg:gap-6 w-full md:w-2/3 ">
+              <form className="relative flex flex-col justify-center items-center gap-1 md:gap-4 lg:gap-6 w-full md:w-2/3">
+                <label id="player-name-label">{fieldError}</label>
                 <input
                   type="text"
                   name="player_name"
-                  className="w-full p-2 md:p-4 lg:p-6 border-2 md:border-4 focus:outline-none border-white bg-transparent rounded-2xl text-white placeholder:text-white text-2xl"
+                  className={`w-full p-2 md:p-4 lg:p-6 border-2 md:border-4 focus:outline-none bg-transparent rounded-2xl text-white placeholder:text-white text-2xl
+                  ${isErrorForm ? 'border-red-500' : 'border-white'}`}
                   placeholder="Your name"
                   required={true}
                   minLength={2}
