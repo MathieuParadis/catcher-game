@@ -14,7 +14,6 @@ const ScoreTable = (): JSX.Element => {
   const [scores, setScores] = useState<ScoreRecordType[]>()
 
   const { data, isLoading, isFetching, isError } = useGetScoresQuery(null)
-  // const { data } = useGetScoresQuery(null)
 
   useEffect(() => {
     if (data != null) {
