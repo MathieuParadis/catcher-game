@@ -10,21 +10,17 @@ import type { ScoreRecordType } from '../../types/scoreRecordTypes'
 // API CALLS IMPORTS
 import { useGetScoresQuery } from '../../redux/services/score'
 
-// DATA IMPORTS
-// import { ranking } from '../../data/ranking'
-
 const RankingTable = (): JSX.Element => {
   const [scores, setScores] = useState<ScoreRecordType[]>()
 
   // const { data, isLoading, isFetching, isError } = useGetScoresQuery(null)
   const { data } = useGetScoresQuery(null)
 
-  // useEffect(() => {
-  //   const sortedScores = data?.sort((a, b) => b.score - a.score)
-  //   setScores(sortedScores)
-  // }, [data])
-
-  console.log(data)
+  useEffect(() => {
+    if (data != null) {
+      setScores(data)
+    }
+  }, [data])
 
   return (
     <table className="min-w-full border-separate border-spacing-y-1.5">
