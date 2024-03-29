@@ -32,7 +32,7 @@ const ScoreTable = (): JSX.Element => {
             <th className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4">Score</th>
           </tr>
         </thead>
-        {(isLoading || isFetching) && !isError && (
+        {!(isLoading || isFetching) && !isError && (
           <tbody className="text-black overflow-y-scroll bg-gradient-to-b from-[var(--sky1-color)] via-[var(--wave-front-color)] to-[var(--sand-color)] font-medium">
             {scores?.map(
               (rank: ScoreRecordType, index: number): JSX.Element => (
@@ -69,12 +69,19 @@ const ScoreTable = (): JSX.Element => {
           </tbody>
         )}
       </table>
-      {!(isLoading || isFetching) && !isError && (
+      {(isLoading || isFetching) && !isError && (
         <div className="flex flex-col justify-center items-center border border-white p-2 md:p-4">
           <p className="text-lg md:text-xl lg:text-2xl font2 text-white text-center mb-8">
             Wait a moment while the data is laoding!
           </p>
           <ReactLoading type={'spinningBubbles'} color="white" height={120} width={120} />
+        </div>
+      )}
+      {isError && (
+        <div className="flex flex-col justify-center items-center border border-red-400 p-2 md:p-4">
+          <p className="text-lg md:text-xl lg:text-2xl font2 text-red-400 text-center">
+            Oops! Something went wrong while fetching the data.
+          </p>
         </div>
       )}
     </div>
