@@ -18,7 +18,10 @@ export const scoreExtendedApiSlice = apiSlice.injectEndpoints({
       query: (body) => ({
         url: '/api/scores',
         method: 'POST',
-        body
+        body: {
+          player_name: body.playerName,
+          score: body.score
+        }
       }),
       invalidatesTags: ['score']
     })

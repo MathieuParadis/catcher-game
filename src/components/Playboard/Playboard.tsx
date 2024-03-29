@@ -25,7 +25,7 @@ const Playboard = (): JSX.Element => {
         {!areRulesDisplayed && !isGameOver && <PlayCanvas score={score} setScore={setScore} />}
 
         {/* Game in progress */}
-        {!areRulesDisplayed && isGameOver && <GameOver score={score} />}
+        {!areRulesDisplayed && isGameOver && <GameOver score={score} setScore={setScore} />}
       </div>
     </div>
   )
