@@ -16,13 +16,12 @@ Before running the frontend app, ensure that the backend server is running in th
 
 To run the backend server in development mode, navigate to the backend repository and start the server using the following command:
 ```bash
-	rails server -p 3000
+  rails server -p 3000
 ```
-
 
 1. Clone this repository to your local machine
 ```
-	git clone https://github.com/MathieuParadis/catcher-game.git
+  git clone https://github.com/MathieuParadis/catcher-game.git
 ```
 
 2. Navigate to the project directory
@@ -32,12 +31,12 @@ To run the backend server in development mode, navigate to the backend repositor
 
 3. Install the package dependencies by running
 ```
-	npm install
+  npm install
 ```
 
 4. Start the server by running
 ```
-	npm start
+  npm start
 ```
 
 5. Open your web browser and navigate to `http://localhost:3001`.
@@ -59,5 +58,4 @@ To run the backend server in development mode, navigate to the backend repositor
 
 
 ## Enhancements
-### Real-Time Score Updates
-Integrate WebSocket communication using libraries like Socket.io or GraphQL subscriptions to provide real-time score updates.
+1. **Real-Time Score Updates:** Integrate WebSocket communication using libraries like Socket.io or GraphQL subscriptions to provide real-time score updates.
