@@ -4,9 +4,6 @@ import React, { useEffect, useState } from 'react'
 // // REACT LOADING IMPORT
 // import ReactLoading from 'react-loading'
 
-// // REACT TOAST IMPORTS
-// import toast from 'react-hot-toast'
-
 // TYPES IMPORTS
 import type { ScoreRecordType } from '../../types/scoreRecordTypes'
 
@@ -19,18 +16,15 @@ import { useGetScoresQuery } from '../../redux/services/score'
 const RankingTable = (): JSX.Element => {
   const [scores, setScores] = useState<ScoreRecordType[]>()
 
-  const { data, isLoading, isFetching, isError } = useGetScoresQuery(null)
+  // const { data, isLoading, isFetching, isError } = useGetScoresQuery(null)
+  const { data } = useGetScoresQuery(null)
 
   // useEffect(() => {
-  //   if (isError) {
-  //     toast.error('Enable to fetch data', { duration: 3000, id: 'error' })
-  //   } else toast.remove()
-  // })
+  //   const sortedScores = data?.sort((a, b) => b.score - a.score)
+  //   setScores(sortedScores)
+  // }, [data])
 
-  useEffect(() => {
-    const sortedScores = data?.sort((a, b) => b.score - a.score)
-    setScores(sortedScores)
-  }, [data])
+  console.log(data)
 
   return (
     <table className="min-w-full border-separate border-spacing-y-1.5">
