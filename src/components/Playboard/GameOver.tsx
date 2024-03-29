@@ -47,11 +47,11 @@ const GameOver = ({ score }: Props): JSX.Element => {
               <p className="text-2xl md:text-4xl lg:text-6xl font2 text-white text-center font-bold">
                 Your score: {score}
               </p>
-              <form className="flex flex-col justify-center items-center gap-1 md:gap-4 w-full md:w-2/3 ">
+              <form className="flex flex-col justify-center items-center gap-1 md:gap-4 lg:gap-6 w-full md:w-2/3 ">
                 <input
                   type="text"
                   name="player_name"
-                  className="w-full p-2 md:p-4 lg:p-6 border-2 md:border-4 border-white bg-transparent rounded-2xl placeholder:text-white text-2xl"
+                  className="w-full p-2 md:p-4 lg:p-6 border-2 md:border-4 focus:outline-none border-white bg-transparent rounded-2xl text-white placeholder:text-white text-2xl"
                   placeholder="Your name"
                   required={true}
                   value={playerName}
