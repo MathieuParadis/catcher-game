@@ -90,13 +90,15 @@ const GameOver = ({ score, setScore }: Props): JSX.Element => {
                 Your score: {score}
               </p>
               <form className="relative flex flex-col justify-center items-center gap-1 md:gap-4 lg:gap-6 w-full md:w-2/3">
-                <label className="animate-bounce" id="player-name-label">
-                  {fieldError}yo
+                <label
+                  className={`absolute top-[17px] md:top-[25px] lg:top-[32px] right-[10px] md:right-[20px] lg:right-[28px] text-red-500 animate-bounce
+                ${isErrorForm ? 'block' : 'hidden'}`}>
+                  {fieldError}
                 </label>
                 <input
                   type="text"
                   name="player_name"
-                  className={`w-full p-2 md:p-4 lg:p-6 border-2 md:border-4 focus:outline-none bg-transparent rounded-2xl text-white placeholder:text-white text-2xl
+                  className={`w-full p-2 md:p-4 lg:p-6 border-2 md:border-4 focus:outline-none bg-transparent rounded-2xl text-white placeholder:text-white text-2xl md:text-3xl lg:text-4xl
                   ${isErrorForm ? 'border-red-500' : 'border-white'}`}
                   placeholder="Your name"
                   required={true}

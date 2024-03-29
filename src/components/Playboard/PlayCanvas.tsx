@@ -342,7 +342,7 @@ const PlayCanvas = ({ score, setScore }: Props): JSX.Element => {
         <Timer
           className="flex justify-center items-center font1 w-[70px] md:w-[90px] lg:w-[110px] text-xl md:text-2xl lg:text-3xl aspect-[379/200] text-white bg-[url('../assets/image/woodboard.png')] bg-cover"
           textClassName="w-[25px] md:w-[30px] lg:w-[35px]"
-          countdownSeconds={6}
+          countdownSeconds={60}
           onExpire={stopGame}
           isPause={isGamePaused || isStartResumeTimerActive || !isGameInProgress}
           displayIcon={true}
