@@ -1,9 +1,8 @@
-
 // SLICE IMPORT
 import { apiSlice } from '../slices/apiSlice'
 
 // TYPES IMPORTS
-import { type ScoreRecordType} from '../../types/ScoreRecordTypes'
+import type { ScoreRecordType } from '../../types/scoreRecordTypes'
 
 export const scoreExtendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

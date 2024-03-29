@@ -3,15 +3,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import type { ThunkAction, Action } from '@reduxjs/toolkit'
 
 // SLICES IMPORTS
+import { apiSlice } from '../slices/apiSlice'
 import { gameModeSlice } from '../slices/gameModeSlice'
 import { playModeSlice } from '../slices/playModeSlice'
 
 export const store = configureStore({
   reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
     [gameModeSlice.name]: gameModeSlice.reducer,
     [playModeSlice.name]: playModeSlice.reducer
   },
-  devTools: true
+  devTools: true,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
 })
 
 type AppState = ReturnType<typeof store.getState>
