@@ -31,7 +31,7 @@ const RankingTable = (): JSX.Element => {
           <th className="py-2 md:py-3 lg:py-4 pl-2 md:pl-3 lg:pl-4">Score</th>
         </tr>
       </thead>
-      <tbody className="text-black overflow-y-scroll bg-gradient-to-b from-[var(--sky1-color)] to-[var(--sand-color)] font-medium">
+      <tbody className="text-black overflow-y-scroll bg-gradient-to-b from-[var(--sky1-color)] via-[var(--wave-front-color)] to-[var(--sand-color)] font-medium">
         {scores?.map(
           (rank: ScoreRecordType, index: number): JSX.Element => (
             <tr key={index} className="">
