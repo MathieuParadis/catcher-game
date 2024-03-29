@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# Sea Catch Adventure Frontend
+Welcome to the frontend repository of Sea Catch Adventure, a catch game and leaderboard web application built with HTML, CSS, and JavaScript.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+Sea Catch Adventure is a web application designed to provide users with an entertaining catch game experience while also allowing them to compete for high scores on a global leaderboard.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Sea Catch Adventure Backend
+For the backend functionality of Sea Catch Adventure, please refer to the [Sea Catch Adventure Backend Repository](https://github.com/MathieuParadis/catcher-game-api).
 
-### `yarn start`
+The backend repository contains the server-side code built with Ruby on Rails, including API endpoints, database management, and other backend functionalities.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation and Setup
+Before running the frontend app, ensure that the backend server is running in the development environment. The frontend app communicates with the backend API endpoints to fetch data and submit scores. If the backend server is not running, the frontend may not function as expected.
 
-### `yarn test`
+To run the backend server in development mode, navigate to the backend repository and start the server using the following command:
+```bash
+  rails server -p 3000
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone this repository to your local machine
+```
+  git clone https://github.com/MathieuParadis/catcher-game.git
+```
 
-### `yarn build`
+2. Navigate to the project directory
+```bash
+  cd catcher-game
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Install the package dependencies by running
+```
+  npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Start the server by running
+```
+  npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. Open your web browser and navigate to `http://localhost:3001`.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Technologies Used
+* ReactJS
+* HTML5
+* CSS3
+* Tailwind CSS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Folder Structure
+- `src/`: Contains the source code for the React components and application logic.
+  - `components/`: Contains React components for the catch game and leaderboard.
+- `App.js`: Main React component for rendering the application.
+- `index.js`: Entry point for the React application.
+- `public/`: Contains the `index.html` file and other static assets.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Enhancements
+1. **Real-Time Score Updates:** Integrate WebSocket communication using libraries like Socket.io or GraphQL subscriptions to provide real-time score updates.
