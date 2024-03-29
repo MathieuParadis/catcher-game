@@ -3,3 +3,8 @@ export interface ScoreRecordType {
   score: number
   playerName: string
 }
+
+export interface AddScoreRecordRequestType {
+  score: number
+  playerName: string
+}
