@@ -35,7 +35,7 @@ const GameOver = ({ score }: Props): JSX.Element => {
 
       {/* Content */}
       <div className="absolute top-0 left-0 h-full w-full overflow-auto flex flex-col justify-center items-center gap-10 md:gap-16 lg:gap-24  p-2 md:p-4 lg:p-6">
-        <h1 className="text-5xl md:text-7xl lg:text-9xl text-center text-yellow-500 font1 my-2 md:my-4 lg:my-6 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+        <h1 className="text-5xl md:text-7xl lg:text-9xl text-center bg-gradient-to-b from-yellow-500 to-red-500 inline-block text-transparent bg-clip-text font1 my-2 md:my-4 lg:my-6 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
           Game Over
         </h1>
 
