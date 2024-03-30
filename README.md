@@ -58,4 +58,6 @@ To run the backend server in development mode, navigate to the backend repositor
 
 
 ## Enhancements
-1. **Real-Time Score Updates:** Integrate WebSocket communication using libraries like Socket.io or GraphQL subscriptions to provide real-time score updates.
+1. **Multiple Items Falling:** Enhance gameplay by allowing multiple items to fall simultaneously, increasing the challenge for players and adding variety to the catch game experience.
+2. **Real-Time Score Updates:** Integrate WebSocket communication using libraries like Socket.io or GraphQL subscriptions to provide real-time score updates.
+
