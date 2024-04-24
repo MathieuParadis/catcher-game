@@ -1,9 +1,6 @@
 // REACT IMPORT
 import React from 'react'
 
-// Credits
-// @SarahFrisk - "https://twitter.com/sarahfrisk"
-
 const AnimatedBoat = (): JSX.Element => {
   return (
     <div className="absolute h-full w-full bg-gradient-to-b from-[var(--sky1-color)] to-[var(--sky2-color)]">

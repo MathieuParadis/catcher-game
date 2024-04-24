@@ -61,3 +61,6 @@ To run the backend server in development mode, navigate to the backend repositor
 1. **Multiple Items Falling:** Enhance gameplay by allowing multiple items to fall simultaneously, increasing the challenge for players and adding variety to the catch game experience.
 2. **Real-Time Score Updates:** Integrate WebSocket communication with Action Cable to provide real-time score updates.
 
+
+## Credits
+- [SarahFrisk](https://twitter.com/sarahfrisk) - Captivating animation on the homepage
